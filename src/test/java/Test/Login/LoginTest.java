@@ -1,27 +1,38 @@
-package Test;
+package Test.Login;
 
 import Model.LoginPageModel;
 import Model.ProfilePageModel;
 import com.codecool.FileReader;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import com.codecool.RandomHelper;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 public class LoginTest {
     static WebDriver webDriver;
+    private static ChromeOptions browserOptions;
+
     @BeforeAll
     public static void setProperty(){
         System.setProperty("webdriver.chrome.driver", FileReader.getValueByKey("driver.location"));
+    }
 
-        webDriver = new ChromeDriver();
+    @BeforeEach
+    public void openNewTab(){
+        browserOptions = new ChromeOptions();
+        browserOptions.addArguments("--incognito");
+        webDriver = new ChromeDriver(browserOptions);
+
         webDriver.get("https://jira-auto.codecool.metastage.net/login.jsp?os_destination=%2Fsecure%2FTests.jspa#/design?projectId=10101");
+        RandomHelper.Wait(webDriver);
     }
 
     @AfterEach
     public void closeTab(){ webDriver.close(); }
+
+    @AfterAll
+    public static void closeWebDriver(){ webDriver.quit(); }
 
     @Test
     public void successfulLogin(){
@@ -33,7 +44,20 @@ public class LoginTest {
         loginPageModel.login(FileReader.getValueByKey("jira.username"), FileReader.getValueByKey("jira.password"));
 
         webDriver.get("https://jira-auto.codecool.metastage.net/secure/ViewProfile.jspa");
+        RandomHelper.Wait(webDriver);
 
         Assertions.assertTrue(profilePageModel.getFullName().contains(FileReader.getValueByKey("jira.displayname")));
+    }
+
+    @Test
+    public void loginWithInvalidUserName(){
+        LoginPageModel loginPageModel = new LoginPageModel(webDriver);
+
+        Assertions.assertTrue(loginPageModel.getTitle().contains("Welcome to Jira Auto"));
+
+        loginPageModel.login("whatever", FileReader.getValueByKey("jira.password"));
+        RandomHelper.Wait(webDriver);
+
+        Assertions.assertTrue(loginPageModel.getErrorMsg().contains("Sorry, your username and password are incorrect - please try again."));
     }
 }
