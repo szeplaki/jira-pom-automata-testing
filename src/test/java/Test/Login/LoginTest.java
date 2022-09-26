@@ -1,5 +1,6 @@
 package Test.Login;
 
+import Model.DashPageModel;
 import Model.LoginPageModel;
 import Model.ProfilePageModel;
 import com.codecool.FileReader;
@@ -35,13 +36,31 @@ public class LoginTest {
     public static void closeWebDriver(){ webDriver.quit(); }
 
     @Test
-    public void successfulLogin(){
+    public void successfulLoginOnLoginPage(){
         LoginPageModel loginPageModel = new LoginPageModel(webDriver);
         ProfilePageModel profilePageModel = new ProfilePageModel(webDriver);
 
         Assertions.assertTrue(loginPageModel.getTitle().contains("Welcome to Jira Auto"));
 
         loginPageModel.login(FileReader.getValueByKey("jira.username"), FileReader.getValueByKey("jira.password"));
+
+        webDriver.get("https://jira-auto.codecool.metastage.net/secure/ViewProfile.jspa");
+        RandomHelper.Wait(webDriver);
+
+        Assertions.assertTrue(profilePageModel.getFullName().contains(FileReader.getValueByKey("jira.displayname")));
+    }
+
+    @Test
+    public void successfulLoginOnDashPage(){
+        DashPageModel dashPageModel = new DashPageModel(webDriver);
+        ProfilePageModel profilePageModel = new ProfilePageModel(webDriver);
+
+        webDriver.get("https://jira-auto.codecool.metastage.net/secure/Dashboard.jspa");
+
+        Assertions.assertTrue(dashPageModel.getDashPageTitle().contains("System Dashboard"));
+
+        dashPageModel.login(FileReader.getValueByKey("jira.username"), FileReader.getValueByKey("jira.password"));
+        RandomHelper.Wait(webDriver);
 
         webDriver.get("https://jira-auto.codecool.metastage.net/secure/ViewProfile.jspa");
         RandomHelper.Wait(webDriver);
