@@ -52,6 +52,7 @@ public class LoginTest {
 
     @Test
     public void successfulLoginOnDashPage(){
+        //TODO if we have time separate dash from login page and do all test all over again
         DashPageModel dashPageModel = new DashPageModel(webDriver);
         ProfilePageModel profilePageModel = new ProfilePageModel(webDriver);
 
