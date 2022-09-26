@@ -1,7 +1,7 @@
 package BrowseProjectTest;
 
-import Model.BrowseProjectModel;
-import Model.LoginPageModel;
+import Model.BrowseProject.BrowseProjectModel;
+import Model.Login.LoginPageModel;
 import com.codecool.FileReader;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;

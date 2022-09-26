@@ -1,8 +1,7 @@
 package Logout;
 
-import Model.LoginPageModel;
-import Model.LogoutModel;
-import Model.ProfilePageModel;
+import Model.Login.LoginPageModel;
+import Model.Logout.LogoutModel;
 import com.codecool.FileReader;
 import com.codecool.RandomHelper;
 import org.junit.jupiter.api.*;

@@ -1,8 +1,8 @@
 package Login;
 
-import Model.DashPageModel;
-import Model.LoginPageModel;
-import Model.ProfilePageModel;
+import Model.Login.DashPageModel;
+import Model.Login.LoginPageModel;
+import Model.Login.ProfilePageModel;
 import com.codecool.FileReader;
 import com.codecool.RandomHelper;
 import org.junit.jupiter.api.*;
