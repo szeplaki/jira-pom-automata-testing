@@ -2,16 +2,15 @@ package BrowseProjectTest;
 
 import Model.BrowseProjectModel;
 import Model.LoginPageModel;
-import Model.LogoutModel;
 import com.codecool.FileReader;
-import com.codecool.RandomHelper;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 public class BrowseProjectTest {
-
     static WebDriver webDriver;
     private static ChromeOptions browserOptions;
 
@@ -25,10 +24,8 @@ public class BrowseProjectTest {
         browserOptions = new ChromeOptions();
         browserOptions.addArguments("--incognito");
         webDriver = new ChromeDriver(browserOptions);
-
         webDriver.get("https://jira-auto.codecool.metastage.net/login.jsp?os_destination=%2Fsecure%2FTests.jspa#/design?projectId=10101");
         webDriver.manage().window().maximize();
-        RandomHelper.Wait(webDriver);
     }
 
     @AfterEach
@@ -42,17 +39,15 @@ public class BrowseProjectTest {
     }
 
 
-
-    @Test
-    public void browseProject() {
-        //TODO wait for TOUCAN, JETI, COALA parametrization
+    @ParameterizedTest
+    @ValueSource(strings = {"MTP", "JETI", "TOUCAN", "COALA"})
+    public void browseProject(String projectType) {
         LoginPageModel loginPageModel = new LoginPageModel(webDriver);
         loginPageModel.login(FileReader.getValueByKey("jira.username"), FileReader.getValueByKey("jira.password"));
-        RandomHelper.Wait(webDriver);
-        webDriver.get("https://jira-auto.codecool.metastage.net/projects/MTP/summary");
+        webDriver.get(String.format("https://jira-auto.codecool.metastage.net/projects/%s/summary", projectType));
         BrowseProjectModel browseProjectModel = new BrowseProjectModel(webDriver);
 
-        Assertions.assertTrue(browseProjectModel.getProjectKey().contains("MTP"));
+        Assertions.assertTrue(browseProjectModel.getProjectKey().contains(projectType));
     }
 }
 

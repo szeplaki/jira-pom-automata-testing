@@ -2,7 +2,6 @@ package Model;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -15,11 +14,11 @@ public class BrowseProjectModel {
         PageFactory.initElements(webDriver, this);
     }
 
-    @FindBy(xpath = "//*[@id=\"summary-body\"]/div/div[2]/dl/dd[3]")
+    @FindBy(xpath = "//*[@id=\"sidebar\"]/div/div[1]/div/div/div[2]/h1/div/div/a")
     private WebElement projectKey;
 
 
     public String getProjectKey() {
-        return projectKey.getText();
+        return projectKey.getAttribute("href");
     }
 }
