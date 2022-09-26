@@ -45,6 +45,7 @@ public class LoginTest {
         loginPageModel.login(FileReader.getValueByKey("jira.username"), FileReader.getValueByKey("jira.password"));
 
         webDriver.get("https://jira-auto.codecool.metastage.net/secure/ViewProfile.jspa");
+        webDriver.manage().window().maximize();
         RandomHelper.Wait(webDriver);
 
         Assertions.assertTrue(profilePageModel.getFullName().contains(FileReader.getValueByKey("jira.displayname")));
