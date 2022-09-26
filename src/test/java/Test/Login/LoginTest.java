@@ -59,5 +59,21 @@ public class LoginTest {
         RandomHelper.Wait(webDriver);
 
         Assertions.assertTrue(loginPageModel.getErrorMsg().contains("Sorry, your username and password are incorrect - please try again."));
+
+        loginPageModel.login(FileReader.getValueByKey("jira.username"), FileReader.getValueByKey("jira.password"));
+    }
+
+    @Test
+    public void loginWithInvalidPassword(){
+        LoginPageModel loginPageModel = new LoginPageModel(webDriver);
+
+        Assertions.assertTrue(loginPageModel.getTitle().contains("Welcome to Jira Auto"));
+
+        loginPageModel.login(FileReader.getValueByKey("jira.username"), "whatever");
+        RandomHelper.Wait(webDriver);
+
+        Assertions.assertTrue(loginPageModel.getErrorMsg().contains("Sorry, your username and password are incorrect - please try again."));
+
+        loginPageModel.login(FileReader.getValueByKey("jira.username"), FileReader.getValueByKey("jira.password"));
     }
 }
