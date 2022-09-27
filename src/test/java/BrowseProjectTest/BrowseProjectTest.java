@@ -49,5 +49,16 @@ public class BrowseProjectTest {
 
         Assertions.assertTrue(browseProjectModel.getProjectKey().contains(projectType));
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"DUMMYDATA"})
+    public void browseNonExistingProject(String projectType) {
+        LoginPageModel loginPageModel = new LoginPageModel(webDriver);
+        loginPageModel.login(FileReader.getValueByKey("jira.username"), FileReader.getValueByKey("jira.password"));
+        webDriver.get(String.format("https://jira-auto.codecool.metastage.net/projects/%s/summary", projectType));
+        BrowseProjectModel browseProjectModel = new BrowseProjectModel(webDriver);
+
+        Assertions.assertTrue(browseProjectModel.getErrorMessage().contains("You can't view this project"));
+    }
 }
 

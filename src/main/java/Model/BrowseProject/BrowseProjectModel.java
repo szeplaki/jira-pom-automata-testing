@@ -17,8 +17,15 @@ public class BrowseProjectModel {
     @FindBy(xpath = "//*[@id=\"sidebar\"]/div/div[1]/div/div/div[2]/h1/div/div/a")
     private WebElement projectKey;
 
+    @FindBy(xpath = "//*[@id=\"main\"]/h1")
+    private WebElement errorMessage;
+
 
     public String getProjectKey() {
         return projectKey.getAttribute("href");
+    }
+
+    public String getErrorMessage() {
+        return errorMessage.getText();
     }
 }
