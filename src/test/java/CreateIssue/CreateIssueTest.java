@@ -5,6 +5,8 @@ import Model.CreateIssue.CreateIssueModel;
 import User.UserMethods;
 import com.codecool.FileReader;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -74,5 +76,22 @@ public class CreateIssueTest {
         Assertions.assertEquals(expectedIssueType,actualType);
         Assertions.assertEquals(expectedSummary, actualSummary);
         Assertions.assertTrue(actualKey.contains(expectedProjectKey));
+    }
+
+
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/createTests.csv", numLinesToSkip = 1)
+    public void specificIssueCreateTest(String expectedProjectKey, String expectedIssueType)
+    {
+        createIssueModel.openCreateIssueModal();
+
+        createIssueModel.selectProject(expectedProjectKey);
+        String actualProject = createIssueModel.getProjectFieldValue();
+        createIssueModel.selectIssueType(expectedIssueType);
+        String actualIssueType = createIssueModel.getIssueFieldValue();
+
+        Assertions.assertTrue(actualProject.contains(expectedProjectKey));
+        Assertions.assertEquals(expectedIssueType,actualIssueType);
     }
 }
