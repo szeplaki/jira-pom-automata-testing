@@ -1,8 +1,6 @@
 package BrowseIssue;
 
 import Model.BrowseIssue.BrowseIssueModel;
-import Model.BrowseProject.BrowseProjectModel;
-import Model.Login.LoginPageModel;
 import User.UserMethods;
 import com.codecool.FileReader;
 import com.codecool.RandomHelper;
@@ -55,6 +53,7 @@ public class BrowseIssueTest {
         browseIssueModel.getSearchField().click();
         browseIssueModel.getSearchField().sendKeys("Jira Test Project");
         browseIssueModel.getSearchButton().click();
+        RandomHelper.waitUntilVisibleOrClickable(webDriver, "id", "key-val");
         Assertions.assertEquals("MTP-2245", browseIssueModel.getIssueId());
     }
 }

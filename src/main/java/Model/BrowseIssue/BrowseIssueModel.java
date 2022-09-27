@@ -23,8 +23,6 @@ public class BrowseIssueModel {
     @FindBy(xpath = "//*[@id=\"main\"]/div/div[1]/form/div[1]/div[1]/div[1]/div[1]/div/div[1]/ul/li[7]/button")
     private WebElement searchButton;
 
-    @FindBy(xpath = "//*[@id=\"key-val\"]")
-    private WebElement issueNumber;
     public String getIssueId() {
         return issueId.getText();
     }
@@ -37,7 +35,4 @@ public class BrowseIssueModel {
         return searchButton;
     }
 
-    public WebElement getIssueNumber() {
-        return issueNumber;
-    }
 }
