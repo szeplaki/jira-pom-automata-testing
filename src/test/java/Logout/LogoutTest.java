@@ -2,6 +2,7 @@ package Logout;
 
 import Model.Login.LoginPageModel;
 import Model.Logout.LogoutModel;
+import User.UserMethods;
 import com.codecool.FileReader;
 import com.codecool.RandomHelper;
 import org.junit.jupiter.api.*;
@@ -37,10 +38,8 @@ public class LogoutTest {
 
     @Test
     public void successfulLogout(){
-        LoginPageModel loginPageModel = new LoginPageModel(webDriver);
+        UserMethods.login(webDriver);
         LogoutModel logoutModel = new LogoutModel(webDriver);
-
-        loginPageModel.login(FileReader.getValueByKey("jira.username"), FileReader.getValueByKey("jira.password"));
         RandomHelper.Wait(webDriver);
 
         logoutModel.logout();

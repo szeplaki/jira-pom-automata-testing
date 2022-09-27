@@ -1,7 +1,8 @@
-package BrowseProjectTest;
+package BrowseProject;
 
 import Model.BrowseProject.BrowseProjectModel;
 import Model.Login.LoginPageModel;
+import User.UserMethods;
 import com.codecool.FileReader;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -24,6 +25,7 @@ public class BrowseProjectTest {
         browserOptions = new ChromeOptions();
         browserOptions.addArguments("--incognito");
         webDriver = new ChromeDriver(browserOptions);
+        UserMethods.login(webDriver);
         webDriver.get("https://jira-auto.codecool.metastage.net/login.jsp?os_destination=%2Fsecure%2FTests.jspa#/design?projectId=10101");
         webDriver.manage().window().maximize();
     }
@@ -42,8 +44,6 @@ public class BrowseProjectTest {
     @ParameterizedTest
     @ValueSource(strings = {"MTP", "JETI", "TOUCAN", "COALA"})
     public void browseProject(String projectType) {
-        LoginPageModel loginPageModel = new LoginPageModel(webDriver);
-        loginPageModel.login(FileReader.getValueByKey("jira.username"), FileReader.getValueByKey("jira.password"));
         webDriver.get(String.format("https://jira-auto.codecool.metastage.net/projects/%s/summary", projectType));
         BrowseProjectModel browseProjectModel = new BrowseProjectModel(webDriver);
 
@@ -53,8 +53,6 @@ public class BrowseProjectTest {
     @ParameterizedTest
     @ValueSource(strings = {"DUMMYDATA"})
     public void browseNonExistingProject(String projectType) {
-        LoginPageModel loginPageModel = new LoginPageModel(webDriver);
-        loginPageModel.login(FileReader.getValueByKey("jira.username"), FileReader.getValueByKey("jira.password"));
         webDriver.get(String.format("https://jira-auto.codecool.metastage.net/projects/%s/summary", projectType));
         BrowseProjectModel browseProjectModel = new BrowseProjectModel(webDriver);
 
