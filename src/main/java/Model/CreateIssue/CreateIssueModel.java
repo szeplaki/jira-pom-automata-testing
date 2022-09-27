@@ -34,6 +34,9 @@ public class CreateIssueModel {
     @FindBy(xpath = "//h2[text() = 'Create Issue']")
     private WebElement modalHeader;
 
+    @FindBy(xpath = "//*[@id = 'create-issue-dialog']//div[@class = 'error']")
+    private WebElement summaryErrorField;
+
 
     public void openCreateIssueModal()
     {
@@ -99,6 +102,12 @@ public class CreateIssueModel {
         String value = summaryField.getAttribute("value");
         summaryField.clear();
         return value;
+    }
+
+    public String getSummaryErrorMessage()
+    {
+        RandomHelper.waitUntilVisibleOrClickable(driver,"xpath","//*[@id = 'create-issue-dialog']//div[@class = 'error']");
+        return summaryErrorField.getText();
     }
 
 
