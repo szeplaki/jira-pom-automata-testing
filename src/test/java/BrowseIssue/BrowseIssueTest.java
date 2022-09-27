@@ -1,10 +1,13 @@
 package BrowseIssue;
 
 import Model.BrowseIssue.BrowseIssueModel;
+import Model.BrowseProject.BrowseProjectModel;
 import User.UserMethods;
 import com.codecool.FileReader;
 import com.codecool.RandomHelper;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -44,16 +47,32 @@ public class BrowseIssueTest {
     @Test
     public void browseExistingIssue() {
         webDriver.get("https://jira-auto.codecool.metastage.net/browse/MTP-2253");
-        Assertions.assertEquals("MTP-2253",browseIssueModel.getIssueId());
+        Assertions.assertEquals("MTP-2253", browseIssueModel.getIssueId());
     }
 
     @Test
-    public void checkPossibilityOfBrowsing(){
+    public void checkPossibilityOfBrowsing() {
         webDriver.get("https://jira-auto.codecool.metastage.net/issues/?jql=");
         browseIssueModel.getSearchField().click();
         browseIssueModel.getSearchField().sendKeys("Jira Test Project");
         browseIssueModel.getSearchButton().click();
         RandomHelper.waitUntilVisibleOrClickable(webDriver, "id", "key-val");
         Assertions.assertEquals("MTP-2245", browseIssueModel.getIssueId());
+    }
+
+    @Test
+    public void browseNonExistingIssue() {
+        webDriver.get("https://jira-auto.codecool.metastage.net/browse/MTP-99999999999");
+        Assertions.assertEquals("You can't view this issue", browseIssueModel.getErrorMessageField());
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/issueIds.csv")
+    public void browseIssueWithSpecificId(String issueId) {
+
+        webDriver.get(String.format("https://jira-auto.codecool.metastage.net/browse/%s", issueId));
+        Assertions.assertDoesNotThrow(() -> Assertions.assertEquals(issueId, browseIssueModel.getIssueId()));
+
+
     }
 }

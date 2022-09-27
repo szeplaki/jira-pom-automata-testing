@@ -23,6 +23,9 @@ public class BrowseIssueModel {
     @FindBy(xpath = "//*[@id=\"main\"]/div/div[1]/form/div[1]/div[1]/div[1]/div[1]/div/div[1]/ul/li[7]/button")
     private WebElement searchButton;
 
+    @FindBy(xpath = "//*[@id=\"issue-content\"]/div/div/h1")
+    private WebElement errorMessageField;
+
     public String getIssueId() {
         return issueId.getText();
     }
@@ -35,4 +38,7 @@ public class BrowseIssueModel {
         return searchButton;
     }
 
+    public String getErrorMessageField() {
+        return errorMessageField.getText();
+    }
 }
