@@ -78,6 +78,20 @@ public class CreateIssueTest {
         Assertions.assertTrue(actualKey.contains(expectedProjectKey));
     }
 
+    @Test
+    public void createIssueEmptySummary()
+    {
+        createIssueModel.openCreateIssueModal();
+        createIssueModel.submitIssue();
+
+        final String[] errorMessage = new String[1];
+        Assertions.assertDoesNotThrow(() -> {
+            errorMessage[0] = createIssueModel.getSummaryErrorMessage();
+        });
+
+        Assertions.assertTrue(errorMessage[0].contains("You must specify a summary of the issue"));
+    }
+
 
 
     @ParameterizedTest
