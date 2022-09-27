@@ -71,7 +71,8 @@ public class BrowseIssueTest {
     public void browseIssueWithSpecificId(String issueId) {
 
         webDriver.get(String.format("https://jira-auto.codecool.metastage.net/browse/%s", issueId));
-        Assertions.assertDoesNotThrow(() -> Assertions.assertEquals(issueId, browseIssueModel.getIssueId()));
+        Assertions.assertDoesNotThrow(() -> browseIssueModel.getIssueId());
+        Assertions.assertEquals(issueId, browseIssueModel.getIssueId());
 
 
     }
