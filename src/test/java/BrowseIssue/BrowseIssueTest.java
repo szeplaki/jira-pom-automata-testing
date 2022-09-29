@@ -2,10 +2,7 @@ package BrowseIssue;
 
 import Model.BrowseIssue.BrowseIssueModel;
 import com.codecool.WebDriverService;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
@@ -18,7 +15,7 @@ public class BrowseIssueTest {
         browseIssueModel.doLogin();
     }
 
-    @AfterAll
+    @AfterEach
     public void closeWebDriver() {
         WebDriverService.getInstance().quitWebDriver();
     }
@@ -33,12 +30,13 @@ public class BrowseIssueTest {
 
     @Test
     public void checkPossibilityOfBrowsing() {
+        String expectedKey = "MTP-2245";
         browseIssueModel.openUrlWithSpecificEndingAndMaximizeWindowSize("/issues/?jql=");
-        browseIssueModel.getSearchField().click();
-        browseIssueModel.getSearchField().sendKeys("Jira Test Project");
-        browseIssueModel.getSearchButton().click();
-        browseIssueModel.waitUntilKeyIsVisible();
-        Assertions.assertEquals("MTP-2245", browseIssueModel.getIssueId());
+        browseIssueModel.clickSearchField();
+        browseIssueModel.writeSearchField("Jira Test Project");
+        browseIssueModel.clickSearchButton();
+        Assertions.assertTrue(browseIssueModel.waitUntilKeyIsVisible(expectedKey));
+//        Assertions.assertEquals(expectedKey, browseIssueModel.getIssueId());
     }
 
     @Test
