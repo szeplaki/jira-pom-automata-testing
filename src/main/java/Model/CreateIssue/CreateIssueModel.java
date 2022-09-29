@@ -16,10 +16,10 @@ import java.time.Duration;
 public class CreateIssueModel extends LoginPageModel {
     private WebDriverWait driverWait;
 
-    public CreateIssueModel(WebDriver driver) {
-        super(driver);
-        PageFactory.initElements(driver, this);
-        this.driverWait = new WebDriverWait(driver, Duration.ofSeconds(15));
+    public CreateIssueModel() {
+        super();
+        PageFactory.initElements(webDriver, this);
+        this.driverWait = new WebDriverWait(webDriver, Duration.ofSeconds(15));
     }
 
     @FindBy(id = "create_link")

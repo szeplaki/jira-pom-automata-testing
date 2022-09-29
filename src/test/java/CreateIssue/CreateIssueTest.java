@@ -29,7 +29,7 @@ public class CreateIssueTest {
         webDriver = new ChromeDriver(browserOptions);
 
 //        webDriver.manage().window().maximize();
-        createIssueModel  = new CreateIssueModel(webDriver);
+        createIssueModel  = new CreateIssueModel();
         createIssueModel.doLogin();
     }
 
@@ -59,7 +59,7 @@ public class CreateIssueTest {
         createIssueModel.submitIssue();
         createIssueModel.openSubmittedIssue();
 
-        BrowseIssueModel browseIssueModel = new BrowseIssueModel(webDriver);
+        BrowseIssueModel browseIssueModel = new BrowseIssueModel();
 
         String actualType = browseIssueModel.getIssueType();
         String actualSummary = browseIssueModel.getSummary();

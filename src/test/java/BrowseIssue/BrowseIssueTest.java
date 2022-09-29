@@ -33,7 +33,7 @@ public class BrowseIssueTest {
         driverWait = new WebDriverWait(webDriver, Duration.ofSeconds(15));
 
         webDriver.manage().window().maximize();
-        browseIssueModel = new BrowseIssueModel(webDriver);
+        browseIssueModel = new BrowseIssueModel();
         browseIssueModel.doLogin();
     }
 

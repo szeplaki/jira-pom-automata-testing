@@ -26,7 +26,7 @@ public class BrowseProjectTest {
         webDriver = new ChromeDriver(browserOptions);
         webDriver.get(FileReader.getValueByKey("jira.baseurl") + "/login.jsp?os_destination=%2Fsecure%2FTests.jspa#/design?projectId=10101");
         webDriver.manage().window().maximize();
-        browseProjectModel = new BrowseProjectModel(webDriver);
+        browseProjectModel = new BrowseProjectModel();
         browseProjectModel.doLogin();
     }
 

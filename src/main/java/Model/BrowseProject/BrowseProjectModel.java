@@ -8,8 +8,8 @@ import org.openqa.selenium.support.PageFactory;
 
 public class BrowseProjectModel extends LoginPageModel {
 
-    public BrowseProjectModel(WebDriver webDriver) {
-        super(webDriver);
+    public BrowseProjectModel() {
+        super();
         PageFactory.initElements(webDriver, this);
     }
 
