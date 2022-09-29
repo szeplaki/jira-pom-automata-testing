@@ -30,11 +30,6 @@ public class BrowseProjectTest {
     }
 
     @AfterEach
-    public void closeTab() {
-        webDriver.close();
-    }
-
-    @AfterAll
     public static void closeWebDriver() {
         webDriver.quit();
     }

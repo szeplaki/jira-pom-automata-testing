@@ -41,14 +41,11 @@ public class EditIssueTest {
     }
 
     @AfterEach
-    public void closeTab() {
-        webDriver.close();
-    }
-
-    @AfterAll
     public static void closeWebDriver() {
         webDriver.quit();
     }
+
+
 
     @Test
     public void successfulEditIssue(){

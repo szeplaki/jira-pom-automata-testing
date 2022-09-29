@@ -28,10 +28,10 @@ public class BrowseIssueModel {
     @FindBy(id = "searcher-query")
     private WebElement searchField;
 
-    @FindBy(xpath = "//*[@id=\"main\"]/div/div[1]/form/div[1]/div[1]/div[1]/div[1]/div/div[1]/ul/li[7]/button")
+    @FindBy(xpath = "//*[@id='main']//form//button[text() = 'Search']")
     private WebElement searchButton;
 
-    @FindBy(xpath = "//*[@id=\"issue-content\"]/div/div/h1")
+    @FindBy(xpath = "//*[@id='issue-content']//h1")
     private WebElement errorMessageField;
 
     @FindBy(id = "type-val")

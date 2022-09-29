@@ -29,10 +29,8 @@ public class LoginTest {
     }
 
     @AfterEach
-    public void closeTab(){ webDriver.close(); }
+    public void closeTab(){ webDriver.quit(); }
 
-    @AfterAll
-    public static void closeWebDriver(){ webDriver.quit(); }
 
     @Test
     public void successfulLoginOnLoginPage(){

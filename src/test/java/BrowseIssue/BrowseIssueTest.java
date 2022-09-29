@@ -39,14 +39,11 @@ public class BrowseIssueTest {
     }
 
     @AfterEach
-    public void closeTab() {
-        webDriver.close();
-    }
-
-    @AfterAll
     public static void closeWebDriver() {
         webDriver.quit();
     }
+
+
 
     @Test
     public void browseExistingIssue() {
@@ -78,7 +75,5 @@ public class BrowseIssueTest {
         webDriver.get(String.format(FileReader.getValueByKey("jira.baseurl") + "browse/%s", issueId));
         Assertions.assertDoesNotThrow(() -> browseIssueModel.getIssueId());
         Assertions.assertEquals(issueId, browseIssueModel.getIssueId());
-
-
     }
 }
