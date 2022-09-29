@@ -3,16 +3,22 @@ package Model.CreateIssue;
 import Model.Login.LoginPageModel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class CreateIssueModel extends LoginPageModel {
 
+    WebDriverWait shortWait;
     public CreateIssueModel() {
         super();
         PageFactory.initElements(webDriver, this);
+        shortWait = new WebDriverWait(webDriver, Duration.ofMillis(1500));
     }
 
     @FindBy(id = "create_link")
@@ -45,7 +51,14 @@ public class CreateIssueModel extends LoginPageModel {
 
     public void selectProject(String projectName)
     {
-        driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("project-field")));
+        try {
+            shortWait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("project-field")));
+        }
+        catch (TimeoutException ignored){}
+        finally {
+            shortWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("project-field")));
+        }
+//        driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("project-field")));
         projectField.click();
         projectField.sendKeys(Keys.BACK_SPACE);
         projectField.sendKeys(projectName);
@@ -55,7 +68,14 @@ public class CreateIssueModel extends LoginPageModel {
 
     public void selectIssueType(String issueType)
     {
-        driverWait.until(ExpectedConditions.elementToBeClickable(By.id("issuetype-field")));
+        try {
+            shortWait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("issuetype-field")));
+        }
+        catch (TimeoutException ignored){}
+        finally {
+            shortWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("issuetype-field")));
+        }
+//        driverWait.until(ExpectedConditions.elementToBeClickable(By.id("issuetype-field")));
         issueField.click();
         issueField.sendKeys(Keys.BACK_SPACE);
         issueField.sendKeys(issueType);
@@ -81,13 +101,27 @@ public class CreateIssueModel extends LoginPageModel {
 
     public String getProjectFieldValue()
     {
-        driverWait.until(ExpectedConditions.elementToBeClickable(By.id("project-field")));
+        try {
+            shortWait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("project-field")));
+        }
+        catch (TimeoutException ignored){}
+        finally {
+            shortWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("project-field")));
+        }
+//        driverWait.until(ExpectedConditions.elementToBeClickable(By.id("project-field")));
         return extractValueFrom(projectField);
     }
 
     public String getIssueFieldValue()
     {
-        driverWait.until(ExpectedConditions.elementToBeClickable(By.id("issuetype-field")));
+        try {
+            shortWait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("issuetype-field")));
+        }
+        catch (TimeoutException ignored){}
+        finally {
+            shortWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("issuetype-field")));
+        }
+//        driverWait.until(ExpectedConditions.elementToBeClickable(By.id("issuetype-field")));
         return extractValueFrom(issueField);
     }
 
