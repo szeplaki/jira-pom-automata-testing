@@ -1,7 +1,6 @@
 package EditIssue;
 
 import Model.EditIssue.EditIssueModel;
-import User.UserMethods;
 import com.codecool.FileReader;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -34,10 +33,10 @@ public class EditIssueTest {
         browserOptions.addArguments("--incognito");
         webDriver = new ChromeDriver(browserOptions);
         driverWait = new WebDriverWait(webDriver, Duration.ofSeconds(15));
-        UserMethods.login(webDriver);
 
         webDriver.manage().window().maximize();
         editIssueModel = new EditIssueModel(webDriver);
+        editIssueModel.doLogin();
     }
 
     @AfterEach

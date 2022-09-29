@@ -1,7 +1,6 @@
 package BrowseIssue;
 
 import Model.BrowseIssue.BrowseIssueModel;
-import User.UserMethods;
 import com.codecool.FileReader;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -32,10 +31,10 @@ public class BrowseIssueTest {
         browserOptions.addArguments("--incognito");
         webDriver = new ChromeDriver(browserOptions);
         driverWait = new WebDriverWait(webDriver, Duration.ofSeconds(15));
-        UserMethods.login(webDriver);
 
         webDriver.manage().window().maximize();
         browseIssueModel = new BrowseIssueModel(webDriver);
+        browseIssueModel.doLogin();
     }
 
     @AfterEach

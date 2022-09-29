@@ -5,11 +5,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class ProfilePageModel {
-    private WebDriver webDriver;
+public class ProfilePageModel extends LoginPageModel  {
 
     public ProfilePageModel(WebDriver webDriver) {
-        this.webDriver = webDriver;
+        super(webDriver);
         PageFactory.initElements(webDriver, this);
     }
 

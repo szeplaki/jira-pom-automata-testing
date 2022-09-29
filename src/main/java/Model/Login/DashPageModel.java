@@ -5,11 +5,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class DashPageModel {
-    private final WebDriver webDriver;
+public class DashPageModel extends LoginPageModel  {
 
     public DashPageModel(WebDriver webDriver) {
-        this.webDriver = webDriver;
+        super(webDriver);
         PageFactory.initElements(webDriver, this);
     }
 
