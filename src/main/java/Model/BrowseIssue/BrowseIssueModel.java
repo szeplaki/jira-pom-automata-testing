@@ -1,5 +1,6 @@
 package Model.BrowseIssue;
 
+import Model.Login.LoginPageModel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -11,13 +12,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class BrowseIssueModel {
-    private final WebDriver webDriver;
+public class BrowseIssueModel extends LoginPageModel {
     private WebDriverWait driverWait;
 
-
     public BrowseIssueModel(WebDriver webDriver) {
-        this.webDriver = webDriver;
+        super(webDriver);
         PageFactory.initElements(webDriver, this);
         this.driverWait = new WebDriverWait(webDriver, Duration.ofSeconds(15));
     }

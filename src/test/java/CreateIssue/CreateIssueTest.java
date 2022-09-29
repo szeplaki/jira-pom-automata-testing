@@ -2,7 +2,6 @@ package CreateIssue;
 
 import Model.BrowseIssue.BrowseIssueModel;
 import Model.CreateIssue.CreateIssueModel;
-import User.UserMethods;
 import com.codecool.FileReader;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -28,10 +27,10 @@ public class CreateIssueTest {
         ChromeOptions browserOptions = new ChromeOptions();
         browserOptions.addArguments("--incognito");
         webDriver = new ChromeDriver(browserOptions);
-        UserMethods.login(webDriver);
 
 //        webDriver.manage().window().maximize();
         createIssueModel  = new CreateIssueModel(webDriver);
+        createIssueModel.doLogin();
     }
 
     @AfterEach

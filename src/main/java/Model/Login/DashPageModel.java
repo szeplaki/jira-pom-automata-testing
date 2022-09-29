@@ -1,15 +1,14 @@
 package Model.Login;
 
+import com.codecool.FileReader;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class DashPageModel {
-    private final WebDriver webDriver;
+public class DashPageModel extends LoginPageModel  {
 
-    public DashPageModel(WebDriver webDriver) {
-        this.webDriver = webDriver;
+    public DashPageModel() {
         PageFactory.initElements(webDriver, this);
     }
 
@@ -42,5 +41,10 @@ public class DashPageModel {
         setUsername(username);
         setPassword(password);
         clickOnLoginButton();
+    }
+
+    public void openDashboardLogin()
+    {
+        webDriver.get(FileReader.getValueByKey("jira.baseurl") + "/secure/Dashboard.jspa");
     }
 }

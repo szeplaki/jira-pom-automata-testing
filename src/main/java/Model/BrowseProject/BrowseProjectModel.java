@@ -1,16 +1,15 @@
 package Model.BrowseProject;
 
+import Model.Login.LoginPageModel;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class BrowseProjectModel {
-    private final WebDriver webDriver;
-
+public class BrowseProjectModel extends LoginPageModel {
 
     public BrowseProjectModel(WebDriver webDriver) {
-        this.webDriver = webDriver;
+        super(webDriver);
         PageFactory.initElements(webDriver, this);
     }
 

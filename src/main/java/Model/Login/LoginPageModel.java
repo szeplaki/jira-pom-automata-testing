@@ -1,15 +1,24 @@
 package Model.Login;
 
+import com.codecool.FileReader;
+import com.codecool.WebDriverService;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class LoginPageModel {
-    private final WebDriver webDriver;
+    protected final WebDriver webDriver;
+    protected final WebDriverWait driverWait;
 
-    public LoginPageModel(WebDriver webDriver) {
-        this.webDriver = webDriver;
+    public LoginPageModel() {
+        this.webDriver = WebDriverService.getInstance().getWebDriver();
+        driverWait = new WebDriverWait(webDriver, Duration.ofSeconds(15));
         PageFactory.initElements(webDriver, this);
     }
 
@@ -21,7 +30,7 @@ public class LoginPageModel {
     private WebElement loginButton;
     @FindBy(className = "aui-page-header-main")
     private WebElement title;
-    @FindBy(xpath = "//*[@id=\"login-form\"]//p")
+    @FindBy(xpath = "//*[@id='login-form']//p")
     private WebElement invalidLoginMsg;
     @FindBy(id = "login")
     private WebElement loginButtonOnDash;
@@ -61,4 +70,27 @@ public class LoginPageModel {
         setPassword(password);
         clickLoginButtonOnDash();
     }
+
+    public void doLogin(){
+        webDriver.navigate().to("https://jira-auto.codecool.metastage.net/login.jsp?os_destination=%2Fsecure%2FMyJiraHome.jspa");
+
+        login(FileReader.getValueByKey("jira.username"), FileReader.getValueByKey("jira.password"));
+    }
+
+    public void getLoginPage()
+    {
+        webDriver.get(FileReader.getValueByKey("jira.baseurl") + "/login.jsp?os_destination=%2Fsecure%2FTests.jspa#/design?projectId=10101");
+        driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("login-form-submit")));
+    }
+
+    public void waitUntilErrorAppears()
+    {
+        driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='login-form']//p")));
+    }
+    public void waitUntilLoggedIn()
+    {
+        driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("header-details-user-fullname")));
+    }
+
+
 }
