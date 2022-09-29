@@ -113,6 +113,7 @@ public class LoginPageModel {
                 driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id(id)));
                 break;
             case "xpath":
+                driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(id)));
                 break;
         }
     }
