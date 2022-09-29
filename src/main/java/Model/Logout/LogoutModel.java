@@ -8,8 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class LogoutModel extends LoginPageModel {
 
-    public LogoutModel(WebDriver webDriver) {
-        super(webDriver);
+    public LogoutModel() {
         PageFactory.initElements(webDriver, this);
     }
 
