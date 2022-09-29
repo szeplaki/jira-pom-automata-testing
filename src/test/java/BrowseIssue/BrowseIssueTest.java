@@ -39,7 +39,7 @@ public class BrowseIssueTest {
     }
 
     @AfterEach
-    public static void closeWebDriver() {
+    public void closeWebDriver() {
         webDriver.quit();
     }
 
@@ -47,24 +47,23 @@ public class BrowseIssueTest {
 
     @Test
     public void browseExistingIssue() {
-        webDriver.get(FileReader.getValueByKey("jira.baseurl") + "browse/MTP-2253");
+        webDriver.get(FileReader.getValueByKey("jira.baseurl") + "/browse/MTP-2253");
         Assertions.assertEquals("MTP-2253", browseIssueModel.getIssueId());
     }
 
     @Test
     public void checkPossibilityOfBrowsing() {
-        webDriver.get(FileReader.getValueByKey("jira.baseurl") + "issues/?jql=");
+        webDriver.get(FileReader.getValueByKey("jira.baseurl") + "/issues/?jql=");
         browseIssueModel.getSearchField().click();
         browseIssueModel.getSearchField().sendKeys("Jira Test Project");
         browseIssueModel.getSearchButton().click();
-        // RandomHelper.waitUntilVisibleOrClickable(webDriver, "id", "key-val");
         driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("key-val")));
         Assertions.assertEquals("MTP-2245", browseIssueModel.getIssueId());
     }
 
     @Test
     public void browseNonExistingIssue() {
-        webDriver.get(FileReader.getValueByKey("jira.baseurl") + "browse/MTP-99999999999");
+        webDriver.get(FileReader.getValueByKey("jira.baseurl") + "/browse/MTP-99999999999");
         Assertions.assertEquals("You can't view this issue", browseIssueModel.getErrorMessageField());
     }
 
@@ -72,7 +71,7 @@ public class BrowseIssueTest {
     @CsvFileSource(resources = "/issueIds.csv")
     public void browseIssueWithSpecificId(String issueId) {
 
-        webDriver.get(String.format(FileReader.getValueByKey("jira.baseurl") + "browse/%s", issueId));
+        webDriver.get(String.format(FileReader.getValueByKey("jira.baseurl") + "/browse/%s", issueId));
         Assertions.assertDoesNotThrow(() -> browseIssueModel.getIssueId());
         Assertions.assertEquals(issueId, browseIssueModel.getIssueId());
     }

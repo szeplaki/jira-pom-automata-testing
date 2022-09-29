@@ -25,12 +25,12 @@ public class BrowseProjectTest {
         browserOptions.addArguments("--incognito");
         webDriver = new ChromeDriver(browserOptions);
         UserMethods.login(webDriver);
-        webDriver.get(FileReader.getValueByKey("jira.baseurl") + "login.jsp?os_destination=%2Fsecure%2FTests.jspa#/design?projectId=10101");
+        webDriver.get(FileReader.getValueByKey("jira.baseurl") + "/login.jsp?os_destination=%2Fsecure%2FTests.jspa#/design?projectId=10101");
         webDriver.manage().window().maximize();
     }
 
     @AfterEach
-    public static void closeWebDriver() {
+    public void closeWebDriver() {
         webDriver.quit();
     }
 
@@ -38,7 +38,7 @@ public class BrowseProjectTest {
     @ParameterizedTest
     @ValueSource(strings = {"MTP", "JETI", "TOUCAN", "COALA"})
     public void browseProject(String projectType) {
-        webDriver.get(String.format(FileReader.getValueByKey("jira.baseurl") + "projects/%s/summary", projectType));
+        webDriver.get(String.format(FileReader.getValueByKey("jira.baseurl") + "/projects/%s/summary", projectType));
         BrowseProjectModel browseProjectModel = new BrowseProjectModel(webDriver);
 
         Assertions.assertTrue(browseProjectModel.getProjectKey().contains(projectType));
@@ -47,7 +47,7 @@ public class BrowseProjectTest {
     @ParameterizedTest
     @ValueSource(strings = {"DUMMYDATA"})
     public void browseNonExistingProject(String projectType) {
-        webDriver.get(String.format(FileReader.getValueByKey("jira.baseurl") + "projects/%s/summary", projectType));
+        webDriver.get(String.format(FileReader.getValueByKey("jira.baseurl") + "/projects/%s/summary", projectType));
         BrowseProjectModel browseProjectModel = new BrowseProjectModel(webDriver);
 
         Assertions.assertTrue(browseProjectModel.getErrorMessage().contains("You can't view this project"));

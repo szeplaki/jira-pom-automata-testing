@@ -63,7 +63,6 @@ public class BrowseIssueModel {
         JavascriptExecutor jse = (JavascriptExecutor) webDriver;
         WebElement deleteButton = webDriver.findElement(By.id("delete-issue"));
         jse.executeScript("arguments[0].click()", deleteButton);
-        // RandomHelper.waitUntilVisibleOrClickable(webDriver,"click","delete-issue-submit");
         driverWait.until(ExpectedConditions.elementToBeClickable(By.id("delete-issue-submit")));
         webDriver.findElement(By.id("delete-issue-submit")).click();
     }

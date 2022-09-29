@@ -47,13 +47,11 @@ public class CreateIssueModel {
     public void openCreateIssueModal()
     {
         createButton.click();
-        // RandomHelper.waitUntilVisibleOrClickable(driver,"xpath", "//h2[contains(text(),'Create Issue')]");
         driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2[contains(text(),'Create Issue')]")));
     }
 
     public void selectProject(String projectName)
     {
-        // RandomHelper.waitUntilVisibleOrClickable(driver,"click","project-field");
         driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("project-field")));
         projectField.click();
         projectField.sendKeys(Keys.BACK_SPACE);
@@ -64,7 +62,6 @@ public class CreateIssueModel {
 
     public void selectIssueType(String issueType)
     {
-        // RandomHelper.waitUntilVisibleOrClickable(driver,"click","issuetype-field");
         driverWait.until(ExpectedConditions.elementToBeClickable(By.id("issuetype-field")));
         issueField.click();
         issueField.sendKeys(Keys.BACK_SPACE);
@@ -75,7 +72,6 @@ public class CreateIssueModel {
 
     public void setSummary(String summary)
     {
-        // RandomHelper.waitUntilVisibleOrClickable(driver,"click","summary");
         driverWait.until(ExpectedConditions.elementToBeClickable(By.id("summary")));
         summaryField.sendKeys(summary);
     }
@@ -86,21 +82,18 @@ public class CreateIssueModel {
     }
 
     public void openSubmittedIssue() {
-        // RandomHelper.waitUntilVisibleOrClickable(driver, "className", "issue-created-key");
         driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className("issue-created-key")));
         newIssueLink.click();
     }
 
     public String getProjectFieldValue()
     {
-        // RandomHelper.waitUntilVisibleOrClickable(driver,"click","project-field");
         driverWait.until(ExpectedConditions.elementToBeClickable(By.id("project-field")));
         return extractValueFrom(projectField);
     }
 
     public String getIssueFieldValue()
     {
-        // RandomHelper.waitUntilVisibleOrClickable(driver,"click","issuetype-field");
         driverWait.until(ExpectedConditions.elementToBeClickable(By.id("issuetype-field")));
         return extractValueFrom(issueField);
     }
@@ -119,7 +112,6 @@ public class CreateIssueModel {
 
     public String getSummaryErrorMessage()
     {
-        // RandomHelper.waitUntilVisibleOrClickable(driver,"xpath","//*[@id = 'create-issue-dialog']//div[@class = 'error']");
         driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id = 'create-issue-dialog']//div[@class = 'error']")));
         return summaryErrorField.getText();
     }

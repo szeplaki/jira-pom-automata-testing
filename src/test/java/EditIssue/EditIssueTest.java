@@ -41,7 +41,7 @@ public class EditIssueTest {
     }
 
     @AfterEach
-    public static void closeWebDriver() {
+    public void closeWebDriver() {
         webDriver.quit();
     }
 
@@ -50,13 +50,12 @@ public class EditIssueTest {
     @Test
     public void successfulEditIssue(){
         JavascriptExecutor jse = (JavascriptExecutor)webDriver;
-        webDriver.get(FileReader.getValueByKey("jira.baseurl") + "browse/MTP-2245");
+        webDriver.get(FileReader.getValueByKey("jira.baseurl") + "/browse/MTP-2245");
 
         Assertions.assertTrue(editIssueModel.getIssueID().contains("MTP-2245"));
 
         jse.executeScript("arguments[0].click()", editIssueModel.getEditBtn());
 
-        // RandomHelper.waitUntilVisibleOrClickable(webDriver, "xpath", "//*[@id=\"edit-issue-dialog\"]/header/h2");
         driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"edit-issue-dialog\"]/header/h2")));
         Assertions.assertTrue(editIssueModel.getEditModelTitle().contains("Edit Issue : MTP-2245"));
 
@@ -64,14 +63,12 @@ public class EditIssueTest {
 
         editIssueModel.clickUpdateBtn();
 
-        // RandomHelper.waitUntilVisibleOrClickable(webDriver, "id", "summary-val");
         driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("summary-val")));
 
         webDriver.navigate().refresh();
 
         jse.executeScript("arguments[0].click()", editIssueModel.getEditBtn());
 
-        // RandomHelper.waitUntilVisibleOrClickable(webDriver, "xpath", "//*[@id=\"edit-issue-dialog\"]/header/h2");
         driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"edit-issue-dialog\"]/header/h2")));
 
         editIssueModel.setModalSummaryField("Jira Test Project");
@@ -82,7 +79,7 @@ public class EditIssueTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/issueIds.csv")
     public void editIssueWithSpecificId(String issueId){
-        webDriver.get(String.format(FileReader.getValueByKey("jira.baseurl") + "browse/%s", issueId));
+        webDriver.get(String.format(FileReader.getValueByKey("jira.baseurl") + "/browse/%s", issueId));
         Assertions.assertDoesNotThrow(() -> editIssueModel.clickEditBtn());
     }
 }

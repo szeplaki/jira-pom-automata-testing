@@ -24,13 +24,13 @@ public class LogoutTest {
         browserOptions.addArguments("--incognito");
         webDriver = new ChromeDriver(browserOptions);
 
-        webDriver.get(FileReader.getValueByKey("jira.baseurl") + "login.jsp?os_destination=%2Fsecure%2FTests.jspa#/design?projectId=10101");
+        webDriver.get(FileReader.getValueByKey("jira.baseurl") + "/login.jsp?os_destination=%2Fsecure%2FTests.jspa#/design?projectId=10101");
         webDriver.manage().window().maximize();
         RandomHelper.Wait(webDriver);
     }
 
     @AfterEach
-    public static void closeWebDriver(){ webDriver.quit(); }
+    public void closeWebDriver(){ webDriver.quit(); }
 
 
     @Test
