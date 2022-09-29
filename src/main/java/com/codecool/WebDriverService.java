@@ -20,6 +20,7 @@ public class WebDriverService {
     public void quitWebDriver()
     {
         webDriver.quit();
+        webDriver = null;
     }
     private WebDriver createWebDriver() {
         String browserType = FileReader.getValueByKey("browser.type");
