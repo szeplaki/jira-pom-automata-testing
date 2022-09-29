@@ -1,6 +1,5 @@
 package Logout;
 
-import Model.Login.LoginPageModel;
 import Model.Logout.LogoutModel;
 import User.UserMethods;
 import com.codecool.FileReader;

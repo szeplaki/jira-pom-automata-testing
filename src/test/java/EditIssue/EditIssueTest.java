@@ -1,25 +1,26 @@
 package EditIssue;
 
-import Model.BrowseIssue.BrowseIssueModel;
-import Model.CreateIssue.CreateIssueModel;
 import Model.EditIssue.EditIssueModel;
 import User.UserMethods;
 import com.codecool.FileReader;
-import com.codecool.RandomHelper;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class EditIssueTest {
 
     static WebDriver webDriver;
     private static ChromeOptions browserOptions;
-
+    private WebDriverWait driverWait;
     private EditIssueModel editIssueModel;
 
     @BeforeAll
@@ -32,6 +33,7 @@ public class EditIssueTest {
         browserOptions = new ChromeOptions();
         browserOptions.addArguments("--incognito");
         webDriver = new ChromeDriver(browserOptions);
+        driverWait = new WebDriverWait(webDriver, Duration.ofSeconds(15));
         UserMethods.login(webDriver);
 
         webDriver.manage().window().maximize();
@@ -57,20 +59,23 @@ public class EditIssueTest {
 
         jse.executeScript("arguments[0].click()", editIssueModel.getEditBtn());
 
-        RandomHelper.waitUntilVisibleOrClickable(webDriver, "xpath", "//*[@id=\"edit-issue-dialog\"]/header/h2");
+        // RandomHelper.waitUntilVisibleOrClickable(webDriver, "xpath", "//*[@id=\"edit-issue-dialog\"]/header/h2");
+        driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"edit-issue-dialog\"]/header/h2")));
         Assertions.assertTrue(editIssueModel.getEditModelTitle().contains("Edit Issue : MTP-2245"));
 
         editIssueModel.setModalSummaryField("Allopenissues");
 
         editIssueModel.clickUpdateBtn();
 
-        RandomHelper.waitUntilVisibleOrClickable(webDriver, "id", "summary-val");
+        // RandomHelper.waitUntilVisibleOrClickable(webDriver, "id", "summary-val");
+        driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("summary-val")));
 
         webDriver.navigate().refresh();
 
         jse.executeScript("arguments[0].click()", editIssueModel.getEditBtn());
 
-        RandomHelper.waitUntilVisibleOrClickable(webDriver, "xpath", "//*[@id=\"edit-issue-dialog\"]/header/h2");
+        // RandomHelper.waitUntilVisibleOrClickable(webDriver, "xpath", "//*[@id=\"edit-issue-dialog\"]/header/h2");
+        driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"edit-issue-dialog\"]/header/h2")));
 
         editIssueModel.setModalSummaryField("Jira Test Project");
 
