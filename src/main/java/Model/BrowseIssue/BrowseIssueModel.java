@@ -26,7 +26,7 @@ public class BrowseIssueModel {
     @FindBy(xpath = "//*[@id='main']//form//button[text() = 'Search']")
     private WebElement searchButton;
 
-    @FindBy(xpath = "//*[@id=\"issue-content\"]/div/div/h1")
+    @FindBy(xpath = "//*[@id='issue-content']//h1")
     private WebElement errorMessageField;
 
     @FindBy(id = "type-val")

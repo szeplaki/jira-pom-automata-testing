@@ -46,7 +46,7 @@ public class EditIssueTest {
     @Test
     public void successfulEditIssue(){
         JavascriptExecutor jse = (JavascriptExecutor)webDriver;
-        webDriver.get("https://jira-auto.codecool.metastage.net/browse/MTP-2245");
+        webDriver.get(FileReader.getValueByKey("jira.baseurl") + "browse/MTP-2245");
 
         Assertions.assertTrue(editIssueModel.getIssueID().contains("MTP-2245"));
 
@@ -75,7 +75,7 @@ public class EditIssueTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/issueIds.csv")
     public void editIssueWithSpecificId(String issueId){
-        webDriver.get(String.format("https://jira-auto.codecool.metastage.net/browse/%s", issueId));
-        Assertions.assertDoesNotThrow(() -> webDriver.findElement(By.id("edit-issue")));
+        webDriver.get(String.format(FileReader.getValueByKey("jira.baseurl") + "browse/%s", issueId));
+        Assertions.assertDoesNotThrow(() -> editIssueModel.clickEditBtn());
     }
 }
