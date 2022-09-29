@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 public class EditIssueModel  extends LoginPageModel {
 
     public EditIssueModel(WebDriver webDriver) {
-        super(webDriver);
+
         PageFactory.initElements(webDriver, this);
     }
 

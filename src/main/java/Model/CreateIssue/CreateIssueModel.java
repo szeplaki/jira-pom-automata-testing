@@ -1,6 +1,7 @@
 package Model.CreateIssue;
 
 import Model.Login.LoginPageModel;
+import com.codecool.WebDriverService;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -14,12 +15,13 @@ import java.time.Duration;
 
 // page_url = https://jira-auto.codecool.metastage.net/secure/Dashboard.jspa
 public class CreateIssueModel extends LoginPageModel {
-    private WebDriverWait driverWait;
+    protected final WebDriver webDriver;
+    protected final WebDriverWait driverWait;
 
-    public CreateIssueModel(WebDriver driver) {
-        super(driver);
-        PageFactory.initElements(driver, this);
-        this.driverWait = new WebDriverWait(driver, Duration.ofSeconds(15));
+    public CreateIssueModel() {
+        this.webDriver = WebDriverService.getInstance().getWebDriver();
+        PageFactory.initElements(webDriver, this);
+        this.driverWait = new WebDriverWait(webDriver, Duration.ofSeconds(15));
     }
 
     @FindBy(id = "create_link")

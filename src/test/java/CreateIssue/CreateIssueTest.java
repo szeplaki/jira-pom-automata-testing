@@ -3,6 +3,7 @@ package CreateIssue;
 import Model.BrowseIssue.BrowseIssueModel;
 import Model.CreateIssue.CreateIssueModel;
 import com.codecool.FileReader;
+import com.codecool.WebDriverService;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
@@ -13,30 +14,27 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import java.util.UUID;
 
 public class CreateIssueTest {
-    static WebDriver webDriver;
-
     private CreateIssueModel createIssueModel;
 
-    @BeforeAll
-    public static void setProperty() {
-        System.setProperty("webdriver.chrome.driver", FileReader.getValueByKey("driver.location"));
-    }
+//    @BeforeAll
+//    public static void setProperty() {
+//        System.setProperty("webdriver.chrome.driver", FileReader.getValueByKey("driver.location"));
+//    }
 
-    @BeforeEach
-    public void openNewTab() {
-        ChromeOptions browserOptions = new ChromeOptions();
-        browserOptions.addArguments("--incognito");
-        webDriver = new ChromeDriver(browserOptions);
+//    public void openNewTab() {
+//        ChromeOptions browserOptions = new ChromeOptions();
+  //      browserOptions.addArguments("--incognito");
+    //    webDriver = new ChromeDriver(browserOptions);
 
 //        webDriver.manage().window().maximize();
-        createIssueModel  = new CreateIssueModel(webDriver);
-        createIssueModel.doLogin();
-    }
+      //  createIssueModel  = new CreateIssueModel();
+        //createIssueModel.doLogin();
+//    }
 
-    @AfterEach
-    public void closeWebDriver() {
-        webDriver.quit();
-    }
+@AfterEach
+public void closeTab(){
+    WebDriverService.getInstance().quitWebDriver();
+}
 
     @Test
     public void createIssueGeneralTest()
@@ -59,7 +57,7 @@ public class CreateIssueTest {
         createIssueModel.submitIssue();
         createIssueModel.openSubmittedIssue();
 
-        BrowseIssueModel browseIssueModel = new BrowseIssueModel(webDriver);
+        BrowseIssueModel browseIssueModel = new BrowseIssueModel();
 
         String actualType = browseIssueModel.getIssueType();
         String actualSummary = browseIssueModel.getSummary();
