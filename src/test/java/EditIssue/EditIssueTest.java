@@ -1,7 +1,5 @@
 package EditIssue;
 
-import Model.BrowseIssue.BrowseIssueModel;
-import Model.CreateIssue.CreateIssueModel;
 import Model.EditIssue.EditIssueModel;
 import User.UserMethods;
 import com.codecool.FileReader;
@@ -9,9 +7,9 @@ import com.codecool.RandomHelper;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
@@ -39,14 +37,11 @@ public class EditIssueTest {
     }
 
     @AfterEach
-    public void closeTab() {
-        webDriver.close();
-    }
-
-    @AfterAll
     public static void closeWebDriver() {
         webDriver.quit();
     }
+
+
 
     @Test
     public void successfulEditIssue(){
@@ -81,6 +76,6 @@ public class EditIssueTest {
     @CsvFileSource(resources = "/issueIds.csv")
     public void editIssueWithSpecificId(String issueId){
         webDriver.get(String.format("https://jira-auto.codecool.metastage.net/browse/%s", issueId));
-        Assertions.assertDoesNotThrow(() -> editIssueModel.clickEditBtn());
+        Assertions.assertDoesNotThrow(() -> webDriver.findElement(By.id("edit-issue")));
     }
 }

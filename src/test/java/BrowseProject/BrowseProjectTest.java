@@ -1,7 +1,6 @@
 package BrowseProject;
 
 import Model.BrowseProject.BrowseProjectModel;
-import Model.Login.LoginPageModel;
 import User.UserMethods;
 import com.codecool.FileReader;
 import org.junit.jupiter.api.*;
@@ -31,11 +30,6 @@ public class BrowseProjectTest {
     }
 
     @AfterEach
-    public void closeTab() {
-        webDriver.close();
-    }
-
-    @AfterAll
     public static void closeWebDriver() {
         webDriver.quit();
     }

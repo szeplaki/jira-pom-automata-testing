@@ -1,7 +1,6 @@
 package BrowseIssue;
 
 import Model.BrowseIssue.BrowseIssueModel;
-import Model.BrowseProject.BrowseProjectModel;
 import User.UserMethods;
 import com.codecool.FileReader;
 import com.codecool.RandomHelper;
@@ -35,14 +34,11 @@ public class BrowseIssueTest {
     }
 
     @AfterEach
-    public void closeTab() {
-        webDriver.close();
-    }
-
-    @AfterAll
     public static void closeWebDriver() {
         webDriver.quit();
     }
+
+
 
     @Test
     public void browseExistingIssue() {
