@@ -35,7 +35,7 @@ public class CreateIssueTest {
     }
 
     @AfterEach
-    public static void closeWebDriver() {
+    public void closeWebDriver() {
         webDriver.quit();
     }
 

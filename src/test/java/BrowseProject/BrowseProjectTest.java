@@ -30,7 +30,7 @@ public class BrowseProjectTest {
     }
 
     @AfterEach
-    public static void closeWebDriver() {
+    public void closeWebDriver() {
         webDriver.quit();
     }
 
@@ -49,7 +49,6 @@ public class BrowseProjectTest {
     public void browseNonExistingProject(String projectType) {
         webDriver.get(String.format(FileReader.getValueByKey("jira.baseurl") + "projects/%s/summary", projectType));
         BrowseProjectModel browseProjectModel = new BrowseProjectModel(webDriver);
-
         Assertions.assertTrue(browseProjectModel.getErrorMessage().contains("You can't view this project"));
     }
 }
