@@ -24,14 +24,15 @@ public class WebDriverService {
     private WebDriver createWebDriver() {
         String browserType = FileReader.getValueByKey("browser.type");
         String driverLocation = FileReader.getValueByKey("driver.location");
+        String extension = System.getProperty("os.name").contains("Windows") ? ".exe" : "";
 
         switch(browserType) {
             case "chrome":
-                if(driverLocation != null) System.setProperty("webdriver.chrome.driver",driverLocation+"\\chromedriver.exe");
+                if(driverLocation != null) System.setProperty("webdriver.chrome.driver",driverLocation+"chromedriver" + extension);
                 webDriver =new ChromeDriver();
                 break;
             case "firefox":
-                if(driverLocation != null) System.setProperty("webdriver.chrome.driver",driverLocation+"\\geckodriver.exe");
+                if(driverLocation != null) System.setProperty("webdriver.chrome.driver",driverLocation+"geckodriver" + extension);
                 webDriver =  new FirefoxDriver();
                 break;
             default:
