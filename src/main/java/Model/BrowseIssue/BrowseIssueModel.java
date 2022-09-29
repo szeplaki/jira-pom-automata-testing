@@ -3,7 +3,6 @@ package Model.BrowseIssue;
 import Model.Login.LoginPageModel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -13,7 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class BrowseIssueModel extends LoginPageModel {
-    private WebDriverWait driverWait;
+    private final WebDriverWait driverWait;
 
     public BrowseIssueModel() {
         super();
@@ -64,6 +63,10 @@ public class BrowseIssueModel extends LoginPageModel {
         jse.executeScript("arguments[0].click()", deleteButton);
         driverWait.until(ExpectedConditions.elementToBeClickable(By.id("delete-issue-submit")));
         webDriver.findElement(By.id("delete-issue-submit")).click();
+    }
+    public void waitUntilKeyIsVisible()
+    {
+        driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("key-val")));
     }
 
     public String getIssueType()

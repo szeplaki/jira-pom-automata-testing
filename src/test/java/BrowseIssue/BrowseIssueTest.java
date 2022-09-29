@@ -1,76 +1,56 @@
 package BrowseIssue;
 
 import Model.BrowseIssue.BrowseIssueModel;
-import com.codecool.FileReader;
-import org.junit.jupiter.api.*;
+import com.codecool.WebDriverService;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 public class BrowseIssueTest {
-    static WebDriver webDriver;
-    private static ChromeOptions browserOptions;
-    private WebDriverWait driverWait;
     private BrowseIssueModel browseIssueModel;
-
-    @BeforeAll
-    public static void setProperty() {
-        System.setProperty("webdriver.chrome.driver", FileReader.getValueByKey("driver.location"));
-    }
 
     @BeforeEach
     public void openNewTab() {
-        browserOptions = new ChromeOptions();
-        browserOptions.addArguments("--incognito");
-        webDriver = new ChromeDriver(browserOptions);
-        driverWait = new WebDriverWait(webDriver, Duration.ofSeconds(15));
-
-        webDriver.manage().window().maximize();
         browseIssueModel = new BrowseIssueModel();
         browseIssueModel.doLogin();
     }
 
     @AfterEach
     public void closeWebDriver() {
-        webDriver.quit();
+        WebDriverService.getInstance().quitWebDriver();
     }
 
 
 
     @Test
     public void browseExistingIssue() {
-        webDriver.get(FileReader.getValueByKey("jira.baseurl") + "/browse/MTP-2253");
+        browseIssueModel.openUrlWithSpecificEndingAndMaximizeWindowSize("/browse/MTP-2253");
         Assertions.assertEquals("MTP-2253", browseIssueModel.getIssueId());
     }
 
     @Test
     public void checkPossibilityOfBrowsing() {
-        webDriver.get(FileReader.getValueByKey("jira.baseurl") + "/issues/?jql=");
+        browseIssueModel.openUrlWithSpecificEndingAndMaximizeWindowSize("/issues/?jql=");
         browseIssueModel.getSearchField().click();
         browseIssueModel.getSearchField().sendKeys("Jira Test Project");
         browseIssueModel.getSearchButton().click();
-        driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("key-val")));
+        browseIssueModel.waitUntilKeyIsVisible();
         Assertions.assertEquals("MTP-2245", browseIssueModel.getIssueId());
     }
 
     @Test
     public void browseNonExistingIssue() {
-        webDriver.get(FileReader.getValueByKey("jira.baseurl") + "/browse/MTP-99999999999");
+        browseIssueModel.openUrlWithSpecificEndingAndMaximizeWindowSize("/browse/MTP-99999999999");
         Assertions.assertEquals("You can't view this issue", browseIssueModel.getErrorMessageField());
     }
 
     @ParameterizedTest
     @CsvFileSource(resources = "/issueIds.csv")
     public void browseIssueWithSpecificId(String issueId) {
-
-        webDriver.get(String.format(FileReader.getValueByKey("jira.baseurl") + "/browse/%s", issueId));
+        browseIssueModel.openUrlWithSpecificEndingAndMaximizeWindowSize(String.format("/browse/%s", issueId));
         Assertions.assertDoesNotThrow(() -> browseIssueModel.getIssueId());
         Assertions.assertEquals(issueId, browseIssueModel.getIssueId());
     }

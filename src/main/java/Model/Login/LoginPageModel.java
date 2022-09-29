@@ -87,6 +87,9 @@ public class LoginPageModel {
         webDriver.get(FileReader.getValueByKey("jira.baseurl") + ending);
         webDriver.manage().window().maximize();
     }
+    public void openUrlWithEnding(String ending){
+        webDriver.get(FileReader.getValueByKey("jira.baseurl") + ending);
+    }
 
     public void waitUntilErrorAppears()
     {

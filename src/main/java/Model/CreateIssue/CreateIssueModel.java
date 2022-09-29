@@ -3,23 +3,16 @@ package Model.CreateIssue;
 import Model.Login.LoginPageModel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
-
-// page_url = https://jira-auto.codecool.metastage.net/secure/Dashboard.jspa
 public class CreateIssueModel extends LoginPageModel {
-    private WebDriverWait driverWait;
 
     public CreateIssueModel() {
         super();
         PageFactory.initElements(webDriver, this);
-        this.driverWait = new WebDriverWait(webDriver, Duration.ofSeconds(15));
     }
 
     @FindBy(id = "create_link")
