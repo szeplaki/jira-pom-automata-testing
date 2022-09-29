@@ -19,7 +19,7 @@ public class DashPageModel {
     private WebElement passwordField;
     @FindBy(id = "login")
     private WebElement loginButton;
-    @FindBy(xpath = "//*[@id=\"dashboard-content\"]/div[1]/div/div[1]")
+    @FindBy(xpath = "//*[@id='dashboard-content']//div[@class='aui-page-header-main']/h1")
     private WebElement dashPageTitle;
 
     public String getDashPageTitle(){

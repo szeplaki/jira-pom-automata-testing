@@ -21,16 +21,10 @@ public class LoginPageModel {
     private WebElement loginButton;
     @FindBy(className = "aui-page-header-main")
     private WebElement title;
-    @FindBy(xpath = "//*[@id=\"login-form\"]/div[1]/div[1]/p")
+    @FindBy(xpath = "//*[@id=\"login-form\"]//p")
     private WebElement invalidLoginMsg;
     @FindBy(id = "login")
     private WebElement loginButtonOnDash;
-    @FindBy(xpath = "//*[@id=\"dashboard-content\"]/div[1]/div/div[1]")
-    private WebElement dashPageTitle;
-
-    public String getDashPageTitle(){
-        return dashPageTitle.getText();
-    }
 
     private void clickLoginButtonOnDash(){
         loginButtonOnDash.click();

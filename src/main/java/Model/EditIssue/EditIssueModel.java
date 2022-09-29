@@ -14,16 +14,16 @@ public class EditIssueModel {
         PageFactory.initElements(webDriver, this);
     }
 
-    @FindBy(xpath = "//*[@id=\"key-val\"]")
+    @FindBy(id = "key-val")
     WebElement issueID;
 
     @FindBy(id="edit-issue")
     WebElement editBtn;
 
-    @FindBy(xpath = "//*[@id=\"edit-issue-dialog\"]/header/h2")
+    @FindBy(xpath = "//*[@id=\"edit-issue-dialog\"]//h2")
     WebElement editModalTitle;
 
-    @FindBy(xpath = "//*[@id=\"summary\"]")
+    @FindBy(id = "summary")
     WebElement modalSummaryField;
 
     @FindBy(id = "edit-issue-submit")
@@ -32,7 +32,7 @@ public class EditIssueModel {
     @FindBy(id="summary-val")
     WebElement summaryTitle;
 
-    @FindBy(xpath = "//*[@id=\"aui-flag-container\"]/div/div/button")
+    @FindBy(xpath = "//*[@id='aui-flag-container']//button")
     WebElement closeModalBtn;
 
     public String getIssueID(){
