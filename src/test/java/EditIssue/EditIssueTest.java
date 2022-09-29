@@ -1,75 +1,52 @@
 package EditIssue;
 
 import Model.EditIssue.EditIssueModel;
-import com.codecool.FileReader;
-import org.junit.jupiter.api.*;
+import com.codecool.WebDriverService;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 public class EditIssueTest {
-
-    static WebDriver webDriver;
-    private static ChromeOptions browserOptions;
-    private WebDriverWait driverWait;
     private EditIssueModel editIssueModel;
 
-    @BeforeAll
-    public static void setProperty() {
-        System.setProperty("webdriver.chrome.driver", FileReader.getValueByKey("driver.location"));
-    }
 
     @BeforeEach
     public void openNewTab() {
-        browserOptions = new ChromeOptions();
-        browserOptions.addArguments("--incognito");
-        webDriver = new ChromeDriver(browserOptions);
-        driverWait = new WebDriverWait(webDriver, Duration.ofSeconds(15));
-
-        webDriver.manage().window().maximize();
         editIssueModel = new EditIssueModel();
         editIssueModel.doLogin();
     }
 
     @AfterEach
     public void closeWebDriver() {
-        webDriver.quit();
+        WebDriverService.getInstance().quitWebDriver();
     }
 
 
 
     @Test
     public void successfulEditIssue(){
-        JavascriptExecutor jse = (JavascriptExecutor)webDriver;
-        webDriver.get(FileReader.getValueByKey("jira.baseurl") + "/browse/MTP-2245");
+        editIssueModel.openUrlWithEnding("/browse/MTP-2245");
 
         Assertions.assertTrue(editIssueModel.getIssueID().contains("MTP-2245"));
 
-        jse.executeScript("arguments[0].click()", editIssueModel.getEditBtn());
+        editIssueModel.getEditBtn();
 
-        driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"edit-issue-dialog\"]/header/h2")));
+        editIssueModel.waitForModal();
         Assertions.assertTrue(editIssueModel.getEditModelTitle().contains("Edit Issue : MTP-2245"));
 
         editIssueModel.setModalSummaryField("Allopenissues");
 
         editIssueModel.clickUpdateBtn();
+        String actualSummary = editIssueModel.checkSummaryTitle();
 
-        driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("summary-val")));
+        Assertions.assertEquals("Allopenissues", actualSummary);
 
-        webDriver.navigate().refresh();
+        editIssueModel.getEditBtn();
 
-        jse.executeScript("arguments[0].click()", editIssueModel.getEditBtn());
-
-        driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"edit-issue-dialog\"]/header/h2")));
-
+        editIssueModel.waitForModal();
         editIssueModel.setModalSummaryField("Jira Test Project");
 
         editIssueModel.clickUpdateBtn();
@@ -78,7 +55,7 @@ public class EditIssueTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/issueIds.csv")
     public void editIssueWithSpecificId(String issueId){
-        webDriver.get(String.format(FileReader.getValueByKey("jira.baseurl") + "/browse/%s", issueId));
-        Assertions.assertDoesNotThrow(() -> editIssueModel.clickEditBtn());
+        editIssueModel.openUrlWithEnding(String.format("/browse/%s", issueId));
+        Assertions.assertTrue(editIssueModel.checkEditButton());
     }
 }

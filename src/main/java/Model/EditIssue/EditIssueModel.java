@@ -1,10 +1,15 @@
 package Model.EditIssue;
 
 import Model.Login.LoginPageModel;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class EditIssueModel  extends LoginPageModel {
 
@@ -43,11 +48,13 @@ public class EditIssueModel  extends LoginPageModel {
     }
 
     public String getEditModelTitle(){
+        driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"edit-issue-dialog\"]//h2")));
         return editModalTitle.getText();
     }
 
-    public WebElement getEditBtn() {
-        return editBtn;
+    public void getEditBtn() {
+        driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("edit-issue")));
+        editBtn.click();
     }
 
     public void setModalSummaryField(String strSummary){
@@ -65,5 +72,36 @@ public class EditIssueModel  extends LoginPageModel {
 
     public void clickModalBtn(){
         closeModalBtn.click();
+    }
+
+    public void waitForModal()
+    {
+        driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"edit-issue-dialog\"]//h2")));
+    }
+    public String checkSummaryTitle()
+    {
+        try {
+            WebDriverWait shortWait = new WebDriverWait(webDriver, Duration.ofSeconds(2));
+            shortWait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("summary-val")));
+        }
+        catch (TimeoutException ignore){}
+        finally {
+            driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("summary-val")));
+        }
+        webDriver.navigate().refresh();
+        return getSummaryTitle();
+    }
+
+    public boolean checkEditButton()
+    {
+        try {
+            WebDriverWait shortWait = new WebDriverWait(webDriver, Duration.ofSeconds(2));
+            shortWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("edit-issue")));
+        }
+        catch (TimeoutException e)
+        {
+            return false;
+        }
+        return true;
     }
 }
