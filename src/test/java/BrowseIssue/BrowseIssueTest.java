@@ -18,7 +18,7 @@ public class BrowseIssueTest {
         browseIssueModel.doLogin();
     }
 
-    @AfterEach
+    @AfterAll
     public void closeWebDriver() {
         WebDriverService.getInstance().quitWebDriver();
     }

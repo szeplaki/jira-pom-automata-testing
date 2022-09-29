@@ -1,6 +1,7 @@
 package Model.CreateIssue;
 
 import Model.Login.LoginPageModel;
+import com.codecool.WebDriverService;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
