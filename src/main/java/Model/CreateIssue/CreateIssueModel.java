@@ -15,11 +15,10 @@ import java.time.Duration;
 
 // page_url = https://jira-auto.codecool.metastage.net/secure/Dashboard.jspa
 public class CreateIssueModel extends LoginPageModel {
-    protected final WebDriver webDriver;
-    protected final WebDriverWait driverWait;
+    private WebDriverWait driverWait;
 
     public CreateIssueModel() {
-        this.webDriver = WebDriverService.getInstance().getWebDriver();
+        super();
         PageFactory.initElements(webDriver, this);
         this.driverWait = new WebDriverWait(webDriver, Duration.ofSeconds(15));
     }

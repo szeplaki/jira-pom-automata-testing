@@ -35,7 +35,7 @@ public class EditIssueTest {
         driverWait = new WebDriverWait(webDriver, Duration.ofSeconds(15));
 
         webDriver.manage().window().maximize();
-        editIssueModel = new EditIssueModel(webDriver);
+        editIssueModel = new EditIssueModel();
         editIssueModel.doLogin();
     }
 

@@ -16,7 +16,7 @@ public class BrowseIssueModel extends LoginPageModel {
     private WebDriverWait driverWait;
 
     public BrowseIssueModel() {
-
+        super();
         PageFactory.initElements(webDriver, this);
         this.driverWait = new WebDriverWait(webDriver, Duration.ofSeconds(15));
     }

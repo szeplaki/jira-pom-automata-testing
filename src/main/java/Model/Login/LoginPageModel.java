@@ -83,6 +83,11 @@ public class LoginPageModel {
         driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("login-form-submit")));
     }
 
+    public void openUrlWithSpecificEndingAndMaximizeWindowSize(String ending){
+        webDriver.get(FileReader.getValueByKey("jira.baseurl") + ending);
+        webDriver.manage().window().maximize();
+    }
+
     public void waitUntilErrorAppears()
     {
         driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='login-form']//p")));
@@ -92,5 +97,23 @@ public class LoginPageModel {
         driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("header-details-user-fullname")));
     }
 
+    public void openProfilePageAndWaitForLoadIn(){
+        openUrlWithSpecificEndingAndMaximizeWindowSize("/secure/ViewProfile.jspa");
+        driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("up-d-fullname")));
+    }
 
+    public void invalidLoginTry(String username, String password){
+        login(username, password);
+        driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='login-form']//p")));
+    }
+
+    public void waitUntil(String type, String id){
+        switch (type){
+            case "id":
+                driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id(id)));
+                break;
+            case "xpath":
+                break;
+        }
+    }
 }

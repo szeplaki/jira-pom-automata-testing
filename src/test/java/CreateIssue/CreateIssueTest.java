@@ -14,22 +14,25 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import java.util.UUID;
 
 public class CreateIssueTest {
+    static WebDriver webDriver;
+
     private CreateIssueModel createIssueModel;
 
-//    @BeforeAll
-//    public static void setProperty() {
-//        System.setProperty("webdriver.chrome.driver", FileReader.getValueByKey("driver.location"));
-//    }
+    @BeforeAll
+    public static void setProperty() {
+        System.setProperty("webdriver.chrome.driver", FileReader.getValueByKey("driver.location"));
+    }
 
-//    public void openNewTab() {
-//        ChromeOptions browserOptions = new ChromeOptions();
-  //      browserOptions.addArguments("--incognito");
-    //    webDriver = new ChromeDriver(browserOptions);
+    @BeforeEach
+    public void openNewTab() {
+        ChromeOptions browserOptions = new ChromeOptions();
+        browserOptions.addArguments("--incognito");
+        webDriver = new ChromeDriver(browserOptions);
 
 //        webDriver.manage().window().maximize();
-      //  createIssueModel  = new CreateIssueModel();
-        //createIssueModel.doLogin();
-//    }
+        createIssueModel  = new CreateIssueModel();
+        createIssueModel.doLogin();
+    }
 
 @AfterEach
 public void closeTab(){
