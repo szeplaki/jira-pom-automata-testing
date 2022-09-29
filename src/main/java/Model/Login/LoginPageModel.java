@@ -1,12 +1,14 @@
 package Model.Login;
 
+import com.codecool.FileReader;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class LoginPageModel {
-    private final WebDriver webDriver;
+    protected final WebDriver webDriver;
 
     public LoginPageModel(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -60,5 +62,11 @@ public class LoginPageModel {
         setUsername(username);
         setPassword(password);
         clickLoginButtonOnDash();
+    }
+
+    public void doLogin(){
+        webDriver.navigate().to("https://jira-auto.codecool.metastage.net/login.jsp?os_destination=%2Fsecure%2FMyJiraHome.jspa");
+
+        login(FileReader.getValueByKey("jira.username"), FileReader.getValueByKey("jira.password"));
     }
 }

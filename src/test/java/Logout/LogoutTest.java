@@ -1,7 +1,6 @@
 package Logout;
 
 import Model.Logout.LogoutModel;
-import User.UserMethods;
 import com.codecool.FileReader;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
@@ -41,8 +40,8 @@ public class LogoutTest {
 
     @Test
     public void successfulLogout(){
-        UserMethods.login(webDriver);
         LogoutModel logoutModel = new LogoutModel(webDriver);
+        logoutModel.doLogin();
         driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("header-details-user-fullname")));
 
         logoutModel.logout();

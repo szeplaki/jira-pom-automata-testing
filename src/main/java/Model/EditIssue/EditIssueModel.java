@@ -1,16 +1,15 @@
 package Model.EditIssue;
 
+import Model.Login.LoginPageModel;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class EditIssueModel {
-
-    WebDriver webDriver;
+public class EditIssueModel  extends LoginPageModel {
 
     public EditIssueModel(WebDriver webDriver) {
-        this.webDriver = webDriver;
+        super(webDriver);
         PageFactory.initElements(webDriver, this);
     }
 
