@@ -24,7 +24,7 @@ public class LoginTest {
         browserOptions = new ChromeOptions();
         browserOptions.addArguments("--incognito");
         webDriver = new ChromeDriver(browserOptions);
-        webDriver.get(FileReader.getValueByKey("jira.baseurl") + "login.jsp?os_destination=%2Fsecure%2FTests.jspa#/design?projectId=10101");
+        webDriver.get(FileReader.getValueByKey("jira.baseurl") + "/login.jsp?os_destination=%2Fsecure%2FTests.jspa#/design?projectId=10101");
         RandomHelper.Wait(webDriver);
     }
 
@@ -41,7 +41,7 @@ public class LoginTest {
 
         loginPageModel.login(FileReader.getValueByKey("jira.username"), FileReader.getValueByKey("jira.password"));
 
-        webDriver.get(FileReader.getValueByKey("jira.baseurl") + "secure/ViewProfile.jspa");
+        webDriver.get(FileReader.getValueByKey("jira.baseurl") + "/secure/ViewProfile.jspa");
         webDriver.manage().window().maximize();
         RandomHelper.Wait(webDriver);
 
@@ -54,14 +54,14 @@ public class LoginTest {
         DashPageModel dashPageModel = new DashPageModel(webDriver);
         ProfilePageModel profilePageModel = new ProfilePageModel(webDriver);
 
-        webDriver.get(FileReader.getValueByKey("jira.baseurl") + "secure/Dashboard.jspa");
+        webDriver.get(FileReader.getValueByKey("jira.baseurl") + "/secure/Dashboard.jspa");
 
         Assertions.assertTrue(dashPageModel.getDashPageTitle().contains("System Dashboard"));
 
         dashPageModel.login(FileReader.getValueByKey("jira.username"), FileReader.getValueByKey("jira.password"));
         RandomHelper.Wait(webDriver);
 
-        webDriver.get(FileReader.getValueByKey("jira.baseurl") +  "secure/ViewProfile.jspa");
+        webDriver.get(FileReader.getValueByKey("jira.baseurl") +  "/secure/ViewProfile.jspa");
         RandomHelper.Wait(webDriver);
 
         Assertions.assertTrue(profilePageModel.getFullName().contains(FileReader.getValueByKey("jira.displayname")));
