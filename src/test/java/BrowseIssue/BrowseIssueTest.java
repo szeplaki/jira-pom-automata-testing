@@ -46,13 +46,13 @@ public class BrowseIssueTest {
 
     @Test
     public void browseExistingIssue() {
-        webDriver.get("https://jira-auto.codecool.metastage.net/browse/MTP-2253");
+        webDriver.get(FileReader.getValueByKey("jira.baseurl") + "browse/MTP-2253");
         Assertions.assertEquals("MTP-2253", browseIssueModel.getIssueId());
     }
 
     @Test
     public void checkPossibilityOfBrowsing() {
-        webDriver.get("https://jira-auto.codecool.metastage.net/issues/?jql=");
+        webDriver.get(FileReader.getValueByKey("jira.baseurl") + "issues/?jql=");
         browseIssueModel.getSearchField().click();
         browseIssueModel.getSearchField().sendKeys("Jira Test Project");
         browseIssueModel.getSearchButton().click();
@@ -62,7 +62,7 @@ public class BrowseIssueTest {
 
     @Test
     public void browseNonExistingIssue() {
-        webDriver.get("https://jira-auto.codecool.metastage.net/browse/MTP-99999999999");
+        webDriver.get(FileReader.getValueByKey("jira.baseurl") + "browse/MTP-99999999999");
         Assertions.assertEquals("You can't view this issue", browseIssueModel.getErrorMessageField());
     }
 
@@ -70,7 +70,7 @@ public class BrowseIssueTest {
     @CsvFileSource(resources = "/issueIds.csv")
     public void browseIssueWithSpecificId(String issueId) {
 
-        webDriver.get(String.format("https://jira-auto.codecool.metastage.net/browse/%s", issueId));
+        webDriver.get(String.format(FileReader.getValueByKey("jira.baseurl") + "browse/%s", issueId));
         Assertions.assertDoesNotThrow(() -> browseIssueModel.getIssueId());
         Assertions.assertEquals(issueId, browseIssueModel.getIssueId());
 
