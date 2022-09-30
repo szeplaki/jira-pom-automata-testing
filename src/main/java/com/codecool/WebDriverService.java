@@ -14,7 +14,7 @@ public class WebDriverService {
 
     public WebDriver getWebDriver() {
         if (webDriver != null) return webDriver;
-        return createWebDriver();
+        return createWebDriver(FileReader.getValueByKey("browser.type"));
     }
 
     public void quitWebDriver()
@@ -22,22 +22,11 @@ public class WebDriverService {
         webDriver.quit();
         webDriver = null;
     }
-    private WebDriver createWebDriver() {
-        String browserType = FileReader.getValueByKey("browser.type");
-        String driverLocation = FileReader.getValueByKey("driver.location");
-        String extension = System.getProperty("os.name").contains("Windows") ? ".exe" : "";
-
-        switch(browserType) {
-            case "chrome":
-                if(driverLocation != null) System.setProperty("webdriver.chrome.driver",driverLocation+"chromedriver" + extension);
-                webDriver =new ChromeDriver();
-                break;
-            case "firefox":
-                if(driverLocation != null) System.setProperty("webdriver.chrome.driver",driverLocation+"geckodriver" + extension);
-                webDriver =  new FirefoxDriver();
-                break;
-            default:
-                throw new RuntimeException(new Exception("Unknown browser type: " + browserType));
+    private WebDriver createWebDriver(String browserType) {
+        if ("firefox".equals(browserType)) {
+            webDriver = new FirefoxDriver();
+        } else {
+            webDriver = new ChromeDriver();
         }
         return webDriver;
     }
