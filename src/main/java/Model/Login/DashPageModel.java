@@ -1,12 +1,12 @@
 package Model.Login;
 
+import Model.BaseModel;
 import com.codecool.FileReader;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class DashPageModel extends LoginPageModel  {
+public class DashPageModel extends BaseModel {
 
     public DashPageModel() {
         PageFactory.initElements(webDriver, this);
@@ -23,18 +23,6 @@ public class DashPageModel extends LoginPageModel  {
 
     public String getDashPageTitle(){
         return dashPageTitle.getText();
-    }
-
-    private void setUsername(String username){
-        this.usernameField.sendKeys(username);
-    }
-
-    private void setPassword(String password) {
-        this.passwordField.sendKeys(password);
-    }
-
-    private void clickOnLoginButton(){
-        loginButton.click();
     }
 
     public void login(String username, String password){

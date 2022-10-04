@@ -1,6 +1,6 @@
 package Model.EditIssue;
 
-import Model.Login.LoginPageModel;
+import Model.BaseModel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class EditIssueModel  extends LoginPageModel {
+public class EditIssueModel extends BaseModel {
 
     public EditIssueModel() {
         super();

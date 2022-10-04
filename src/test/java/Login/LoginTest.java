@@ -44,7 +44,7 @@ public class LoginTest {
     public void successfulLoginOnDashPage() {
         // TODO külön method a webpage megnyitás és ellenőrzése
         loginPageModel.openUrlWithSpecificPathAndMaximizeWindowSize("/secure/Dashboard.jspa");
-        loginPageModel.waitUntil("id", "login");
+        loginPageModel.waitUntilWebElementIsVisible("id", "login");
 
         Assertions.assertTrue(dashPageModel.getDashPageTitle().contains("System Dashboard"));
 
@@ -57,7 +57,7 @@ public class LoginTest {
 
     @Test
     public void loginWithInvalidUserName() {
-        loginPageModel.waitUntil("", "login-form-submit");
+        loginPageModel.waitUntilWebElementIsVisible("", "login-form-submit");
         Assertions.assertTrue(loginPageModel.getTitle().contains("Welcome to Jira Auto"));
 
         loginPageModel.invalidLoginTry("whatever", FileReader.getValueByKey("jira.password"));
@@ -70,7 +70,7 @@ public class LoginTest {
 
     @Test
     public void loginWithInvalidPassword() {
-        loginPageModel.waitUntil("", "login-form-submit");
+        loginPageModel.waitUntilWebElementIsVisible("", "login-form-submit");
         Assertions.assertTrue(loginPageModel.getTitle().contains("Welcome to Jira Auto"));
 
         loginPageModel.invalidLoginTry(FileReader.getValueByKey("jira.username"), "whatever");

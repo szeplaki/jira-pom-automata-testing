@@ -1,13 +1,13 @@
 package Model.Logout;
 
-import Model.Login.LoginPageModel;
+import Model.BaseModel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class LogoutModel extends LoginPageModel {
+public class LogoutModel extends BaseModel {
 
     public LogoutModel() {
         PageFactory.initElements(webDriver, this);

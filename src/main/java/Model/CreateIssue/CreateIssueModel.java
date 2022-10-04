@@ -1,7 +1,6 @@
 package Model.CreateIssue;
 
-import Model.Login.LoginPageModel;
-import com.codecool.WebDriverService;
+import Model.BaseModel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
@@ -13,7 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class CreateIssueModel extends LoginPageModel {
+public class CreateIssueModel extends BaseModel {
 
     WebDriverWait shortWait;
     public CreateIssueModel() {
