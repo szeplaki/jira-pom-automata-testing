@@ -25,8 +25,10 @@ public class WebDriverService {
     private WebDriver createWebDriver(String browserType) {
         if ("firefox".equals(browserType)) {
             webDriver = new FirefoxDriver();
-        } else {
+        } else if ("chrome".equals(browserType)) {
             webDriver = new ChromeDriver();
+        } else {
+            throw new RuntimeException("cannot create a webdriver");
         }
         return webDriver;
     }
