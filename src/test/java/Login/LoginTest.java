@@ -20,7 +20,7 @@ public class LoginTest {
         loginPageModel = new LoginPageModel();
         profilePageModel = new ProfilePageModel();
         dashPageModel = new DashPageModel();
-        loginPageModel.openUrlWithSpecificEndingAndMaximizeWindowSize("/login.jsp?os_destination=%2Fsecure%2FTests.jspa#/design?projectId=10101");
+        loginPageModel.openUrlWithSpecificPathAndMaximizeWindowSize("/login.jsp?os_destination=%2Fsecure%2FTests.jspa#/design?projectId=10101");
     }
 
     @AfterEach
@@ -42,7 +42,8 @@ public class LoginTest {
 
     @Test
     public void successfulLoginOnDashPage() {
-        loginPageModel.openUrlWithSpecificEndingAndMaximizeWindowSize("/secure/Dashboard.jspa");
+        // TODO külön method a webpage megnyitás és ellenőrzése
+        loginPageModel.openUrlWithSpecificPathAndMaximizeWindowSize("/secure/Dashboard.jspa");
         loginPageModel.waitUntil("id", "login");
 
         Assertions.assertTrue(dashPageModel.getDashPageTitle().contains("System Dashboard"));

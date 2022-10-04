@@ -37,6 +37,7 @@ public class CreateIssueModel extends LoginPageModel {
     private WebElement submitButton;
     @FindBy(className = "issue-created-key")
     private WebElement newIssueLink;
+    // Érdemes találni egy id-vel rendelkező div-et a h2 hierarchia felett
     @FindBy(xpath = "//h2[text() = 'Create Issue']")
     private WebElement modalHeader;
 

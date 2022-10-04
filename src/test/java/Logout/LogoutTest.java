@@ -3,7 +3,6 @@ package Logout;
 import Model.Logout.LogoutModel;
 import com.codecool.WebDriverService;
 import org.junit.jupiter.api.*;
-import Model.Login.LoginPageModel;
 
 public class LogoutTest {
     private static LogoutModel logoutModel;

@@ -24,7 +24,7 @@ public class EditIssueModel  extends LoginPageModel {
     @FindBy(id="edit-issue")
     WebElement editBtn;
 
-    @FindBy(xpath = "//*[@id=\"edit-issue-dialog\"]//h2")
+    @FindBy(xpath = "//*[@id='edit-issue-dialog']//h2")
     WebElement editModalTitle;
 
     @FindBy(id = "summary")
@@ -48,7 +48,7 @@ public class EditIssueModel  extends LoginPageModel {
     }
 
     public String getEditModelTitle(){
-        driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"edit-issue-dialog\"]//h2")));
+        driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='edit-issue-dialog']//h2")));
         return editModalTitle.getText();
     }
 
@@ -76,7 +76,7 @@ public class EditIssueModel  extends LoginPageModel {
 
     public void waitForModal()
     {
-        driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"edit-issue-dialog\"]//h2")));
+        driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='edit-issue-dialog']//h2")));
     }
     public String checkSummaryTitle()
     {
