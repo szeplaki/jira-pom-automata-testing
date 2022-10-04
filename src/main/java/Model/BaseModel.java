@@ -86,6 +86,7 @@ public class BaseModel {
 
     public void doLogin(){
         webDriver.navigate().to(FileReader.getValueByKey("jira.baseurl") + "/login.jsp?os_destination=%2Fsecure%2FMyJiraHome.jspa");
+        webDriver.manage().window().maximize();
 
         setUsername(FileReader.getValueByKey("jira.username"));
         setPassword(FileReader.getValueByKey("jira.password"));
