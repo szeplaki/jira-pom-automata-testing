@@ -12,12 +12,8 @@ public class DashPageModel extends BaseModel {
         PageFactory.initElements(webDriver, this);
     }
 
-    @FindBy(id = "login-form-username")
-    private WebElement usernameField;
-    @FindBy(id = "login-form-password")
-    private WebElement passwordField;
     @FindBy(id = "login")
-    private WebElement loginButton;
+    private WebElement loginButtonOnDash;
     @FindBy(xpath = "//*[@id='dashboard-content']//div[@class='aui-page-header-main']/h1")
     private WebElement dashPageTitle;
 
@@ -25,14 +21,18 @@ public class DashPageModel extends BaseModel {
         return dashPageTitle.getText();
     }
 
-    public void login(String username, String password){
-        setUsername(username);
-        setPassword(password);
-        clickOnLoginButton();
+    private void clickLoginButtonOnDash(){
+        this.loginButtonOnDash.click();
     }
 
-    public void openDashboardLogin()
+    public void openDashboardLoginPage()
     {
         webDriver.get(FileReader.getValueByKey("jira.baseurl") + "/secure/Dashboard.jspa");
+    }
+
+    public void loginOnDashPage(String username, String password){
+        setUsername(username);
+        setPassword(password);
+        clickLoginButtonOnDash();
     }
 }

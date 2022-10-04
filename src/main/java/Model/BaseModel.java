@@ -62,6 +62,28 @@ public class BaseModel {
         }
     }
 
+    /**
+     * The webDriver waits until the selected webElement is clickable, or 15 sec. maximum duration.
+     * @param type type the type of the element you are looking for: id, xpath, css or className.
+     * @param id the selected element's selector.
+     */
+    public void waitUntilWebElementIsClickable(String type, String id){
+        switch (type){
+            case "id":
+                driverWait.until(ExpectedConditions.elementToBeClickable(By.id(id)));
+                break;
+            case "xpath":
+                driverWait.until(ExpectedConditions.elementToBeClickable(By.xpath(id)));
+                break;
+            case "css":
+                driverWait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(id)));
+                break;
+            case "className":
+                driverWait.until(ExpectedConditions.elementToBeClickable(By.className(id)));
+                break;
+        }
+    }
+
     public void doLogin(){
         webDriver.navigate().to(FileReader.getValueByKey("jira.baseurl") + "/login.jsp?os_destination=%2Fsecure%2FMyJiraHome.jspa");
 
@@ -73,5 +95,10 @@ public class BaseModel {
     public void openUrlWithSpecificPathAndMaximizeWindowSize(String path){
         webDriver.get(FileReader.getValueByKey("jira.baseurl") + path);
         webDriver.manage().window().maximize();
+    }
+
+    public void waitUntilLoggedIn()
+    {
+        driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("header-details-user-fullname")));
     }
 }
