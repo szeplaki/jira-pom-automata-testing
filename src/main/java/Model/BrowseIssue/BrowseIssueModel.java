@@ -15,7 +15,6 @@ public class BrowseIssueModel extends BaseModel {
     private final WebDriverWait driverWait;
 
     public BrowseIssueModel() {
-        super();
         PageFactory.initElements(webDriver, this);
         this.driverWait = new WebDriverWait(webDriver, Duration.ofSeconds(15));
     }
