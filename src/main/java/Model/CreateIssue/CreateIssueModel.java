@@ -1,12 +1,10 @@
 package Model.CreateIssue;
 
 import Model.BaseModel;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -53,7 +51,7 @@ public class CreateIssueModel extends BaseModel {
     public void selectProject(String projectName)
     {
         try {
-            shortWait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("project-field")));
+            shortWait.until(CreateIssueModel.absenceOfElementLocated(By.id("project-field")));
         }
         catch (TimeoutException ignored){}
         finally {
@@ -70,7 +68,7 @@ public class CreateIssueModel extends BaseModel {
     public void selectIssueType(String issueType)
     {
         try {
-            shortWait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("issuetype-field")));
+            shortWait.until(CreateIssueModel.absenceOfElementLocated(By.id("issuetype-field")));
         }
         catch (TimeoutException ignored){}
         finally {
@@ -103,7 +101,7 @@ public class CreateIssueModel extends BaseModel {
     public String getProjectFieldValue()
     {
         try {
-            shortWait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("project-field")));
+            shortWait.until(CreateIssueModel.absenceOfElementLocated(By.id("project-field")));
         }
         catch (TimeoutException ignored){}
         finally {
@@ -116,7 +114,7 @@ public class CreateIssueModel extends BaseModel {
     public String getIssueFieldValue()
     {
         try {
-            shortWait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("issuetype-field")));
+            shortWait.until(CreateIssueModel.absenceOfElementLocated(By.id("issuetype-field")));
         }
         catch (TimeoutException ignored){}
         finally {
@@ -142,6 +140,25 @@ public class CreateIssueModel extends BaseModel {
     {
         driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id = 'create-issue-dialog']//div[@class = 'error']")));
         return summaryErrorField.getText();
+    }
+
+    public static ExpectedCondition<Boolean> absenceOfElementLocated(final By locator) {
+        return new ExpectedCondition<Boolean>() {
+            public Boolean apply(WebDriver driver) {
+                try {
+                    driver.findElement(locator);
+                    return false;
+                } catch (NoSuchElementException var3) {
+                    return true;
+                } catch (StaleElementReferenceException err)
+                {
+                    return false;
+                }
+            }
+            public String toString() {
+                return "element to no longer be visible: " + locator;
+            }
+        };
     }
 
 
