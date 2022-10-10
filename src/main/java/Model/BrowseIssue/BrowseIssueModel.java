@@ -1,6 +1,6 @@
 package Model.BrowseIssue;
 
-import Model.Login.LoginPageModel;
+import Model.BaseModel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class BrowseIssueModel extends LoginPageModel {
+public class BrowseIssueModel extends BaseModel {
     private final WebDriverWait driverWait;
 
     public BrowseIssueModel() {

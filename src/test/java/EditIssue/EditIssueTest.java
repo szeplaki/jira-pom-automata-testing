@@ -28,7 +28,7 @@ public class EditIssueTest {
 
     @Test
     public void successfulEditIssue(){
-        editIssueModel.openUrlWithEnding("/browse/MTP-2245");
+        editIssueModel.openUrlWithSpecificPathAndMaximizeWindowSize("/browse/MTP-2245");
 
         Assertions.assertTrue(editIssueModel.getIssueID().contains("MTP-2245"));
 
@@ -55,7 +55,7 @@ public class EditIssueTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/issueIds.csv")
     public void editIssueWithSpecificId(String issueId){
-        editIssueModel.openUrlWithEnding(String.format("/browse/%s", issueId));
+        editIssueModel.openUrlWithSpecificPathAndMaximizeWindowSize(String.format("/browse/%s", issueId));
         Assertions.assertTrue(editIssueModel.checkEditButton());
     }
 }

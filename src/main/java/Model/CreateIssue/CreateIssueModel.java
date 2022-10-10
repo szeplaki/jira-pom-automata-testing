@@ -1,7 +1,6 @@
 package Model.CreateIssue;
 
-import Model.Login.LoginPageModel;
-import com.codecool.WebDriverService;
+import Model.BaseModel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
@@ -13,7 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class CreateIssueModel extends LoginPageModel {
+public class CreateIssueModel extends BaseModel {
 
     WebDriverWait shortWait;
     public CreateIssueModel() {
@@ -37,6 +36,7 @@ public class CreateIssueModel extends LoginPageModel {
     private WebElement submitButton;
     @FindBy(className = "issue-created-key")
     private WebElement newIssueLink;
+    // Érdemes találni egy id-vel rendelkező div-et a h2 hierarchia felett
     @FindBy(xpath = "//h2[text() = 'Create Issue']")
     private WebElement modalHeader;
 

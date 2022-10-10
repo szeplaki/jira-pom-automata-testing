@@ -20,7 +20,7 @@ public class LoginTest {
         loginPageModel = new LoginPageModel();
         profilePageModel = new ProfilePageModel();
         dashPageModel = new DashPageModel();
-        loginPageModel.openUrlWithSpecificEndingAndMaximizeWindowSize("/login.jsp?os_destination=%2Fsecure%2FTests.jspa#/design?projectId=10101");
+        loginPageModel.getLoginPage();
     }
 
     @AfterEach
@@ -42,9 +42,8 @@ public class LoginTest {
 
     @Test
     public void successfulLoginOnDashPage() {
-        loginPageModel.openUrlWithSpecificEndingAndMaximizeWindowSize("/secure/Dashboard.jspa");
-        loginPageModel.waitUntil("id", "login");
-
+        dashPageModel.openDashboardLoginPage();
+        dashPageModel.waitUntilWebElementIsClickable("id", "login");
         Assertions.assertTrue(dashPageModel.getDashPageTitle().contains("System Dashboard"));
 
         dashPageModel.loginOnDashPage(FileReader.getValueByKey("jira.username"), FileReader.getValueByKey("jira.password"));
@@ -56,11 +55,10 @@ public class LoginTest {
 
     @Test
     public void loginWithInvalidUserName() {
-        loginPageModel.waitUntil("", "login-form-submit");
         Assertions.assertTrue(loginPageModel.getTitle().contains("Welcome to Jira Auto"));
 
         loginPageModel.invalidLoginTry("whatever", FileReader.getValueByKey("jira.password"));
-        loginPageModel.waitUntilErrorAppears();
+        loginPageModel.waitUntilErrorAppearsOnLoginPage();
 
         Assertions.assertTrue(loginPageModel.getErrorMsg().contains("Sorry, your username and password are incorrect - please try again."));
 
@@ -69,11 +67,10 @@ public class LoginTest {
 
     @Test
     public void loginWithInvalidPassword() {
-        loginPageModel.waitUntil("", "login-form-submit");
         Assertions.assertTrue(loginPageModel.getTitle().contains("Welcome to Jira Auto"));
 
         loginPageModel.invalidLoginTry(FileReader.getValueByKey("jira.username"), "whatever");
-        loginPageModel.waitUntilErrorAppears();
+        loginPageModel.waitUntilErrorAppearsOnLoginPage();
 
         Assertions.assertTrue(loginPageModel.getErrorMsg().contains("Sorry, your username and password are incorrect - please try again."));
 

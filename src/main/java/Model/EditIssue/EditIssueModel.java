@@ -1,6 +1,6 @@
 package Model.EditIssue;
 
-import Model.Login.LoginPageModel;
+import Model.BaseModel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class EditIssueModel  extends LoginPageModel {
+public class EditIssueModel extends BaseModel {
 
     public EditIssueModel() {
         super();
@@ -24,7 +24,7 @@ public class EditIssueModel  extends LoginPageModel {
     @FindBy(id="edit-issue")
     WebElement editBtn;
 
-    @FindBy(xpath = "//*[@id=\"edit-issue-dialog\"]//h2")
+    @FindBy(xpath = "//*[@id='edit-issue-dialog']//h2")
     WebElement editModalTitle;
 
     @FindBy(id = "summary")
@@ -48,7 +48,7 @@ public class EditIssueModel  extends LoginPageModel {
     }
 
     public String getEditModelTitle(){
-        driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"edit-issue-dialog\"]//h2")));
+        driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='edit-issue-dialog']//h2")));
         return editModalTitle.getText();
     }
 
@@ -76,7 +76,7 @@ public class EditIssueModel  extends LoginPageModel {
 
     public void waitForModal()
     {
-        driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"edit-issue-dialog\"]//h2")));
+        driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='edit-issue-dialog']//h2")));
     }
     public String checkSummaryTitle()
     {

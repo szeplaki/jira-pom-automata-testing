@@ -26,7 +26,7 @@ public class BrowseProjectTest {
     @ParameterizedTest
     @ValueSource(strings = {"MTP", "JETI", "TOUCAN", "COALA"})
     public void browseProject(String projectType) {
-        browseProjectModel.openUrlWithSpecificEndingAndMaximizeWindowSize(String.format("/projects/%s/summary", projectType));
+        browseProjectModel.openUrlWithSpecificPathAndMaximizeWindowSize(String.format("/projects/%s/summary", projectType));
 
         Assertions.assertTrue(browseProjectModel.getProjectKey().contains(projectType));
     }
@@ -34,7 +34,7 @@ public class BrowseProjectTest {
     @ParameterizedTest
     @ValueSource(strings = {"DUMMYDATA"})
     public void browseNonExistingProject(String projectType) {
-        browseProjectModel.openUrlWithSpecificEndingAndMaximizeWindowSize(String.format("/projects/%s/summary", projectType));
+        browseProjectModel.openUrlWithSpecificPathAndMaximizeWindowSize(String.format("/projects/%s/summary", projectType));
 
         Assertions.assertTrue(browseProjectModel.getErrorMessage().contains("You can't view this project"));
     }

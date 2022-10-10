@@ -1,11 +1,11 @@
 package Model.BrowseProject;
 
-import Model.Login.LoginPageModel;
+import Model.BaseModel;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class BrowseProjectModel extends LoginPageModel {
+public class BrowseProjectModel extends BaseModel {
 
     public BrowseProjectModel() {
         super();
