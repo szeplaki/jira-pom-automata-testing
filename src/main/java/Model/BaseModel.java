@@ -10,6 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.net.MalformedURLException;
 import java.time.Duration;
 
 public class BaseModel {
@@ -23,7 +24,7 @@ public class BaseModel {
     @FindBy(id = "login-form-submit")
     protected WebElement loginButton;
 
-    public BaseModel() {
+    public BaseModel() throws MalformedURLException {
         this.webDriver = WebDriverService.getInstance().getWebDriver();
         driverWait = new WebDriverWait(webDriver, Duration.ofSeconds(15));
         PageFactory.initElements(webDriver, this);

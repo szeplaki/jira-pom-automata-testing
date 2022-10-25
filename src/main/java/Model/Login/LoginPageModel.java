@@ -7,11 +7,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.net.MalformedURLException;
+
 public class LoginPageModel extends BaseModel {
     @FindBy(className = "aui-page-header-main")
     private WebElement title;
     @FindBy(xpath = "//*[@id='login-form']//p")
     private WebElement invalidLoginMsg;
+
+    public LoginPageModel() throws MalformedURLException {
+    }
 
 
     public String getErrorMsg(){

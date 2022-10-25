@@ -8,13 +8,13 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.net.MalformedURLException;
 import java.time.Duration;
 
 public class CreateIssueModel extends BaseModel {
 
     WebDriverWait shortWait;
-    public CreateIssueModel() {
-        super();
+    public CreateIssueModel() throws MalformedURLException {
         PageFactory.initElements(webDriver, this);
         shortWait = new WebDriverWait(webDriver, Duration.ofMillis(1500));
     }

@@ -9,12 +9,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
+import java.net.MalformedURLException;
+
 public class EditIssueTest {
     private EditIssueModel editIssueModel;
 
 
     @BeforeEach
-    public void openNewTab() {
+    public void openNewTab() throws MalformedURLException {
         editIssueModel = new EditIssueModel();
         editIssueModel.doLogin();
     }

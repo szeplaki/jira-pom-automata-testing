@@ -6,11 +6,13 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
+import java.net.MalformedURLException;
+
 public class BrowseIssueTest {
     private BrowseIssueModel browseIssueModel;
 
     @BeforeEach
-    public void openNewTab() {
+    public void openNewTab() throws MalformedURLException {
         browseIssueModel = new BrowseIssueModel();
         browseIssueModel.doLogin();
     }

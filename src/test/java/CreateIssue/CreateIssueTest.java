@@ -10,13 +10,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
+import java.net.MalformedURLException;
 import java.util.UUID;
 
 public class CreateIssueTest {
     private CreateIssueModel createIssueModel;
 
     @BeforeEach
-    public void openNewTab() {
+    public void openNewTab() throws MalformedURLException {
 
         createIssueModel  = new CreateIssueModel();
         createIssueModel.doLogin();
@@ -28,8 +29,7 @@ public class CreateIssueTest {
     }
 
     @Test
-    public void createIssueGeneralTest()
-    {
+    public void createIssueGeneralTest() throws MalformedURLException {
         String expectedSummary = UUID.randomUUID().toString();
         String expectedProjectKey = "MTP";
         String expectedIssueType = "Story";

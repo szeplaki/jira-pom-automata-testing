@@ -10,13 +10,15 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.net.MalformedURLException;
+
 public class LoginTest {
     private LoginPageModel loginPageModel;
     private ProfilePageModel profilePageModel;
     private DashPageModel dashPageModel;
 
     @BeforeEach
-    public void setProperty() {
+    public void setProperty() throws MalformedURLException {
         loginPageModel = new LoginPageModel();
         profilePageModel = new ProfilePageModel();
         dashPageModel = new DashPageModel();

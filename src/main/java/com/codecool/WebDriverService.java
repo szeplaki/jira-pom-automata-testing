@@ -1,8 +1,12 @@
 package com.codecool;
 
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class WebDriverService {
     private static final WebDriverService INSTANCE = new WebDriverService();
@@ -12,9 +16,9 @@ public class WebDriverService {
         return INSTANCE;
     }
 
-    public WebDriver getWebDriver() {
+    public WebDriver getWebDriver() throws MalformedURLException {
         if (webDriver != null) return webDriver;
-        return createWebDriver(FileReader.getValueByKey("browser.type"));
+        return createWebDriver();
     }
 
     public void quitWebDriver()
@@ -22,12 +26,20 @@ public class WebDriverService {
         webDriver.quit();
         webDriver = null;
     }
-    private WebDriver createWebDriver(String browserType) {
-        if ("firefox".equals(browserType)) {
-            webDriver = new FirefoxDriver();
+    private WebDriver createWebDriver() throws MalformedURLException {
+        final String BROWSER = FileReader.getValueByKey("browser.type");
+        final String PASSWORD = FileReader.getValueByKey("jira.password");
+
+        DesiredCapabilities capability = new DesiredCapabilities();
+        if ("firefox".equals(BROWSER)) {
+            capability.setBrowserName("firefox");
         } else {
-            webDriver = new ChromeDriver();
+            capability.setBrowserName("chrome");
         }
+        capability.setPlatform(Platform.LINUX);
+        webDriver = new RemoteWebDriver(
+                new URL("https://selenium:" + PASSWORD + "@seleniumhub.codecool.metastage.net/wd/hub"), capability);
+
         return webDriver;
     }
 }

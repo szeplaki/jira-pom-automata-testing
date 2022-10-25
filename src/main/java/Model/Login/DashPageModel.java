@@ -6,9 +6,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.net.MalformedURLException;
+
 public class DashPageModel extends BaseModel {
 
-    public DashPageModel() {
+    public DashPageModel() throws MalformedURLException {
         PageFactory.initElements(webDriver, this);
     }
 
