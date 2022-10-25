@@ -1,7 +1,6 @@
 package Model.Login;
 
 import Model.BaseModel;
-import com.codecool.FileReader;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -29,7 +28,7 @@ public class DashPageModel extends BaseModel {
 
     public void openDashboardLoginPage()
     {
-        webDriver.get(FileReader.getValueByKey("jira.baseurl") + "/secure/Dashboard.jspa");
+        webDriver.get(System.getProperty("baseUrl") + "/secure/Dashboard.jspa");
     }
 
     public void loginOnDashPage(String username, String password){
