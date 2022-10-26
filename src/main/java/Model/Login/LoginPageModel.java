@@ -1,7 +1,6 @@
 package Model.Login;
 
 import Model.BaseModel;
-import com.codecool.FileReader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -35,7 +34,7 @@ public class LoginPageModel extends BaseModel {
 
     public void getLoginPage()
     {
-        webDriver.get(FileReader.getValueByKey("jira.baseurl") + "/login.jsp?os_destination=%2Fsecure%2FTests.jspa#/design?projectId=10101");
+        webDriver.get(System.getProperty("jira.baseurl") + "/login.jsp?os_destination=%2Fsecure%2FTests.jspa#/design?projectId=10101");
         webDriver.manage().window().maximize();
         driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("login-form-submit")));
     }

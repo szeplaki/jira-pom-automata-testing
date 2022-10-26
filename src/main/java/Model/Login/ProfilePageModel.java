@@ -1,7 +1,6 @@
 package Model.Login;
 
 import Model.BaseModel;
-import com.codecool.FileReader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -18,7 +17,7 @@ public class ProfilePageModel extends BaseModel {
 
     public void openProfilePage()
     {
-        webDriver.get(FileReader.getValueByKey("jira.baseurl") + "/secure/ViewProfile.jspa");
+        webDriver.get(System.getProperty("jira.baseurl") + "/secure/ViewProfile.jspa");
         webDriver.manage().window().maximize();
         driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("up-d-fullname")));
     }
