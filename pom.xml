@@ -71,10 +71,10 @@
                 <version>3.0.0-M7</version>
                 <configuration>
                     <includes>
-                        <include>**/BrowseProjectTest.java</include>
-                        <include>**/BrowseIssueTest.java</include>
-                        <include>**/CreateIssueTest.java</include>
-                        <include>**/EditIssueTest.java</include>
+<!--                        <include>**/BrowseProjectTest.java</include>-->
+<!--                        <include>**/BrowseIssueTest.java</include>-->
+<!--                        <include>**/CreateIssueTest.java</include>-->
+<!--                        <include>**/EditIssueTest.java</include>-->
                         <include>**/LoginTest.java</include>
                         <include>**/LogoutTest.java</include>
                     </includes>
