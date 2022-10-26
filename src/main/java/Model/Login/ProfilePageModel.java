@@ -19,7 +19,7 @@ public class ProfilePageModel extends BaseModel {
     {
         webDriver.get(System.getProperty("baseUrl") + "/secure/ViewProfile.jspa");
         webDriver.manage().window().maximize();
-        driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("up-d-fullname")));
+        driverWait.until(ExpectedConditions.elementToBeClickable(By.id("up-d-fullname")));
     }
 
     @FindBy(id = "up-d-fullname")
