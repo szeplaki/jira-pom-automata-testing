@@ -34,7 +34,7 @@ public class LoginPageModel extends BaseModel {
 
     public void getLoginPage()
     {
-        webDriver.get(System.getProperty("jira.baseurl") + "/login.jsp?os_destination=%2Fsecure%2FTests.jspa#/design?projectId=10101");
+        webDriver.get(System.getProperty("baseurl") + "/login.jsp?os_destination=%2Fsecure%2FTests.jspa#/design?projectId=10101");
         webDriver.manage().window().maximize();
         driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("login-form-submit")));
     }
