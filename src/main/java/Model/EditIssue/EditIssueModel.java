@@ -18,8 +18,7 @@ public class EditIssueModel extends BaseModel {
         PageFactory.initElements(webDriver, this);
     }
 
-    @FindBy(id = "key-val")
-    WebElement issueID;
+    By issueID = By.id("key-val");
 
     @FindBy(id="edit-issue")
     WebElement editBtn;
@@ -40,11 +39,11 @@ public class EditIssueModel extends BaseModel {
     WebElement closeModalBtn;
 
     public String getIssueID(){
-        return issueID.getText();
+        return webDriver.findElement(issueID).getText();
     }
 
     public void clickEditBtn(){
-        issueID.click();
+        webDriver.findElement(issueID).click();
     }
 
     public String getEditModelTitle(){
