@@ -11,7 +11,7 @@ pipeline {
             parallel{
                 stage("chrome run"){
                     steps{
-                        sh(script: "mvn clean test -DUSER_NAME=$USER_NAME -DPASSWORD=$PASSWORD -DBASE_URL=$BASE_URL -DBROWSER=CHROME")
+                        sh(script: "mvn clean test -Djira.username=$USER_NAME -Djira.password=$PASSWORD -Djira.baseurl=$BASE_URL -Dbrowser.type=chrome -Djira.displayname=$DISPLAY_NAME")
                     }
                 }
                 stage("firefox run"){
