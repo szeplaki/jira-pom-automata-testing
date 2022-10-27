@@ -4,7 +4,7 @@ pipeline{
   stages {
         stage("build"){
             steps{
-                cleanWs()
+//                 cleanWs()
                 sh(script: "mvn compile")
             }
         }
