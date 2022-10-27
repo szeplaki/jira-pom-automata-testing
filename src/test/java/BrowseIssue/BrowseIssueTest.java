@@ -51,8 +51,12 @@ public class BrowseIssueTest {
     @CsvFileSource(resources = "/issueIds.csv")
     public void browseIssueWithSpecificId(String issueId) {
         browseIssueModel.openUrlWithSpecificPathAndMaximizeWindowSize(String.format("/browse/%s", issueId));
-        final String[] actualIssueId = new String[1];
-        Assertions.assertDoesNotThrow(() -> actualIssueId[0] =  browseIssueModel.getIssueId());
-        Assertions.assertEquals(issueId,actualIssueId[0]);
+        String actualIssueId = null;
+        try {
+            actualIssueId = browseIssueModel.getIssueId();
+        } finally {
+            Assertions.assertNotNull(actualIssueId,"Issue key was not found");
+            Assertions.assertEquals(issueId,actualIssueId);
+        }
     }
 }
