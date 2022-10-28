@@ -51,6 +51,7 @@ public class BrowseIssueTest {
     @CsvFileSource(resources = "/issueIds.csv")
     public void browseIssueWithSpecificId(String issueId) {
         browseIssueModel.openUrlWithSpecificPathAndMaximizeWindowSize(String.format("/browse/%s", issueId));
+        //try catch
         Assertions.assertDoesNotThrow(() -> browseIssueModel.getIssueId());
         Assertions.assertEquals(issueId, browseIssueModel.getIssueId());
     }
