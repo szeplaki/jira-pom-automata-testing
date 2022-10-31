@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.net.MalformedURLException;
 import java.time.Duration;
 
-public class BaseModel {
+public abstract class BaseModel {
     protected final WebDriver webDriver;
     protected final WebDriverWait driverWait;
 
