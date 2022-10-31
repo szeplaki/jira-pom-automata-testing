@@ -27,7 +27,7 @@ public class WebDriverService {
         webDriver = null;
     }
     private WebDriver createWebDriver() throws MalformedURLException {
-        final String BROWSER =System.getProperty("browsertype");
+        final String BROWSER = System.getProperty("browser");
         final String PASSWORD = System.getProperty("password");
 
         DesiredCapabilities capability = new DesiredCapabilities();

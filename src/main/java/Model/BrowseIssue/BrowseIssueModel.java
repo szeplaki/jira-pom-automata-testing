@@ -20,7 +20,7 @@ public class BrowseIssueModel extends BaseModel {
         this.driverWait = new WebDriverWait(webDriver, Duration.ofSeconds(15));
     }
 
-    @FindBy(id = "key-val")
+    @FindBy(xpath = "//*[@id=\"key-val\"]")
     private WebElement issueId;
 
     @FindBy(id = "searcher-query")

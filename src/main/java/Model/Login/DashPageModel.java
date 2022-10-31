@@ -28,7 +28,7 @@ public class DashPageModel extends BaseModel {
 
     public void openDashboardLoginPage()
     {
-        webDriver.get(System.getProperty("baseUrl") + "/secure/Dashboard.jspa");
+        webDriver.get(System.getProperty("baseurl") + "/secure/Dashboard.jspa");
     }
 
     public void loginOnDashPage(String username, String password){

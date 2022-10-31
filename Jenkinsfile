@@ -1,25 +1,26 @@
 pipeline{
   agent any
-  
+
   stages {
-        stage("Build"){
+        stage("build"){
             steps{
+//                 cleanWs()
                 sh(script: "mvn compile")
             }
         }
-        stage("Run tests"){
+        stage("run"){
             parallel{
-                stage("With Chrome"){
-                    steps{
-                        sh(script: "mvn clean test -Dusername=$USERNAME -Dpassword=$PASSWORD -DbaseUrl='$BASEURL' -Ddisplayname='$DISPLAYNAME' -Dbrowsertype=chrome")
+                    stage("With Chrome"){
+                        steps{
+                            sh(script: "mvn clean test -Dusername=$USERNAME -Dpassword=$PASSWORD -Dbaseurl='$BASEURL' -Ddisplayname='$DISPLAYNAME' -Dbrowser=chrome")
+                        }
+                    }
+                    stage("With Firefox"){
+                        steps{
+                            sh(script: "mvn clean test -Dusername=$USERNAME -Dpassword=$PASSWORD -Dbaseurl='$BASEURL' -Ddisplayname='$DISPLAYNAME' -Dbrowser=firefox")
+                        }
                     }
                 }
-                stage("With Firefox"){
-                    steps{
-                        sh(script: "mvn clean test -Dusername=$USERNAME -Dpassword=$PASSWORD -DbaseUrl='$BASEURL' -Ddisplayname='$DISPLAYNAME' -Dbrowsertype=firefox")
-                    }
-                }
-            }
 
             post {
                 always {
