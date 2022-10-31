@@ -1,9 +1,10 @@
 # jira-pom-automata-testing
 
 #### To run the tests:
-You'll need a **config.properties** file in the *root* folder of the project with the following values:
-- driver.location -> Folder where drivers are(optional)
-- jira.username -> A valid user's username for the configured projects
-- jira.password -> A valid user's password for the configured projects
-- jira.displayname -> The users full name on jira
-- browser.type -> currently only "chrome" or "firefox"
+You'll need to set a Jenkins pipelne and configure the parameters with the following values:
+
+baseurl -> The url of the mainpage of the tested project
+username -> A valid user's username for the configured projects
+password -> A valid user's password for the configured projects
+displayname -> The users full name on jira
+browser -> currently only "chrome" or "firefox"
