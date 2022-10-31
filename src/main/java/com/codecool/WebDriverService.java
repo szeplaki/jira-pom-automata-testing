@@ -27,8 +27,7 @@ public class WebDriverService {
         webDriver = null;
     }
     private WebDriver createWebDriver() throws MalformedURLException {
-        final String BROWSER = System.getProperty("browser");
-        final String PASSWORD = System.getProperty("password");
+        final String BROWSER = System.getenv("browser");
 
         DesiredCapabilities capability = new DesiredCapabilities();
         if ("firefox".equals(BROWSER)) {
@@ -38,7 +37,7 @@ public class WebDriverService {
         }
         capability.setPlatform(Platform.LINUX);
         webDriver = new RemoteWebDriver(
-                new URL("https://selenium:" + PASSWORD + "@seleniumhub.codecool.metastage.net/wd/hub"), capability);
+                new URL("http://localhost:4444"), capability);
 
         return webDriver;
     }

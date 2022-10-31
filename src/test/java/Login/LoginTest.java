@@ -33,12 +33,12 @@ public class LoginTest {
     public void successfulLoginOnLoginPage() {
         Assertions.assertTrue(loginPageModel.getTitle().contains("Welcome to Jira Auto"));
 
-        loginPageModel.login(System.getProperty("username"), System.getProperty("password"));
+        loginPageModel.login(System.getenv("username"), System.getenv("password"));
         loginPageModel.waitUntilLoggedIn();
 
         loginPageModel.openProfilePageAndWaitForLoadIn();
 
-        Assertions.assertTrue(profilePageModel.getFullName().contains(System.getProperty("displayname")));
+        Assertions.assertTrue(profilePageModel.getFullName().contains(System.getenv("displayname")));
     }
 
     @Test
@@ -47,34 +47,34 @@ public class LoginTest {
         dashPageModel.waitUntilWebElementIsClickable("id", "login");
         Assertions.assertTrue(dashPageModel.getDashPageTitle().contains("System Dashboard"));
 
-        dashPageModel.loginOnDashPage(System.getProperty("username"), System.getProperty("password"));
+        dashPageModel.loginOnDashPage(System.getenv("username"), System.getenv("password"));
         dashPageModel.waitUntilLoggedIn();
         profilePageModel.openProfilePage();
 
-        Assertions.assertTrue(profilePageModel.getFullName().contains(System.getProperty("displayname")));
+        Assertions.assertTrue(profilePageModel.getFullName().contains(System.getenv("displayname")));
     }
 
     @Test
     public void loginWithInvalidUserName() {
         Assertions.assertTrue(loginPageModel.getTitle().contains("Welcome to Jira Auto"));
 
-        loginPageModel.invalidLoginTry("whatever", System.getProperty("password"));
+        loginPageModel.invalidLoginTry("whatever", System.getenv("password"));
         loginPageModel.waitUntilErrorAppearsOnLoginPage();
 
         Assertions.assertTrue(loginPageModel.getErrorMsg().contains("Sorry, your username and password are incorrect - please try again."));
 
-        loginPageModel.login(System.getProperty("username"), System.getProperty("password"));
+        loginPageModel.login(System.getenv("username"), System.getenv("password"));
     }
 
     @Test
     public void loginWithInvalidPassword() {
         Assertions.assertTrue(loginPageModel.getTitle().contains("Welcome to Jira Auto"));
 
-        loginPageModel.invalidLoginTry(System.getProperty("username"), "whatever");
+        loginPageModel.invalidLoginTry(System.getenv("username"), "whatever");
         loginPageModel.waitUntilErrorAppearsOnLoginPage();
 
         Assertions.assertTrue(loginPageModel.getErrorMsg().contains("Sorry, your username and password are incorrect - please try again."));
 
-        loginPageModel.login(System.getProperty("username"), System.getProperty("password"));
+        loginPageModel.login(System.getenv("username"), System.getenv("password"));
     }
 }

@@ -17,7 +17,7 @@ public class ProfilePageModel extends BaseModel {
 
     public void openProfilePage()
     {
-        webDriver.get(System.getProperty("baseurl") + "/secure/ViewProfile.jspa");
+        webDriver.get(System.getenv("baseurl") + "/secure/ViewProfile.jspa");
         webDriver.manage().window().maximize();
         driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("up-d-fullname")));
     }

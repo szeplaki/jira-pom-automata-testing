@@ -85,16 +85,16 @@ public class BaseModel {
     }
 
     public void doLogin(){
-        webDriver.navigate().to(System.getProperty("baseurl") + "/login.jsp?os_destination=%2Fsecure%2FMyJiraHome.jspa");
+        webDriver.navigate().to(System.getenv("baseurl") + "/login.jsp?os_destination=%2Fsecure%2FMyJiraHome.jspa");
         webDriver.manage().window().maximize();
 
-        setUsername(System.getProperty("username"));
-        setPassword(System.getProperty("password"));
+        setUsername(System.getenv("username"));
+        setPassword(System.getenv("password"));
         clickOnLoginButton();
     }
 
     public void openUrlWithSpecificPathAndMaximizeWindowSize(String path){
-        webDriver.get(System.getProperty("baseurl") + path);
+        webDriver.get(System.getenv("baseurl") + path);
         webDriver.manage().window().maximize();
     }
 
