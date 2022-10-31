@@ -37,8 +37,8 @@ public class BrowseIssueTest {
         browseIssueModel.clickSearchField();
         browseIssueModel.writeSearchField("Jira Test Project");
         browseIssueModel.clickSearchButton();
-        Assertions.assertTrue(browseIssueModel.waitUntilKeyIsVisible(expectedKey));
-//        Assertions.assertEquals(expectedKey, browseIssueModel.getIssueId());
+        browseIssueModel.waitUntilKeyIsVisible(expectedKey);
+        Assertions.assertEquals(expectedKey, browseIssueModel.getIssueId());
     }
 
     @Test
