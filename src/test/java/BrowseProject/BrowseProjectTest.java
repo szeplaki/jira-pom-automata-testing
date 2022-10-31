@@ -8,11 +8,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.net.MalformedURLException;
+
 public class BrowseProjectTest {
     private BrowseProjectModel browseProjectModel;
 
     @BeforeEach
-    public void openNewTab() {
+    public void openNewTab() throws MalformedURLException {
         browseProjectModel = new BrowseProjectModel();
         browseProjectModel.doLogin();
     }

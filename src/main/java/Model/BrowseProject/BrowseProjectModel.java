@@ -5,10 +5,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.net.MalformedURLException;
+
 public class BrowseProjectModel extends BaseModel {
 
-    public BrowseProjectModel() {
-        super();
+    public BrowseProjectModel() throws MalformedURLException {
         PageFactory.initElements(webDriver, this);
     }
 

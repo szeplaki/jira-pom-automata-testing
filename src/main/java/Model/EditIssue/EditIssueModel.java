@@ -9,17 +9,16 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.net.MalformedURLException;
 import java.time.Duration;
 
 public class EditIssueModel extends BaseModel {
 
-    public EditIssueModel() {
-        super();
+    public EditIssueModel() throws MalformedURLException {
         PageFactory.initElements(webDriver, this);
     }
 
-    @FindBy(id = "key-val")
-    WebElement issueID;
+    By issueID = By.id("key-val");
 
     @FindBy(id="edit-issue")
     WebElement editBtn;
@@ -40,11 +39,11 @@ public class EditIssueModel extends BaseModel {
     WebElement closeModalBtn;
 
     public String getIssueID(){
-        return issueID.getText();
+        return webDriver.findElement(issueID).getText();
     }
 
     public void clickEditBtn(){
-        issueID.click();
+        webDriver.findElement(issueID).click();
     }
 
     public String getEditModelTitle(){

@@ -1,17 +1,21 @@
 package Model.Login;
 
 import Model.BaseModel;
-import com.codecool.FileReader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.net.MalformedURLException;
 
 public class LoginPageModel extends BaseModel {
     @FindBy(className = "aui-page-header-main")
     private WebElement title;
     @FindBy(xpath = "//*[@id='login-form']//p")
     private WebElement invalidLoginMsg;
+
+    public LoginPageModel() throws MalformedURLException {
+    }
 
 
     public String getErrorMsg(){
@@ -30,7 +34,7 @@ public class LoginPageModel extends BaseModel {
 
     public void getLoginPage()
     {
-        webDriver.get(FileReader.getValueByKey("jira.baseurl") + "/login.jsp?os_destination=%2Fsecure%2FTests.jspa#/design?projectId=10101");
+        webDriver.get(System.getProperty("baseUrl") + "/login.jsp?os_destination=%2Fsecure%2FTests.jspa#/design?projectId=10101");
         webDriver.manage().window().maximize();
         driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("login-form-submit")));
     }

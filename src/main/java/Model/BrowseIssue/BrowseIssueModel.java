@@ -9,12 +9,13 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.net.MalformedURLException;
 import java.time.Duration;
 
 public class BrowseIssueModel extends BaseModel {
     private final WebDriverWait driverWait;
 
-    public BrowseIssueModel() {
+    public BrowseIssueModel() throws MalformedURLException {
         PageFactory.initElements(webDriver, this);
         this.driverWait = new WebDriverWait(webDriver, Duration.ofSeconds(15));
     }

@@ -6,11 +6,13 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
+import java.net.MalformedURLException;
+
 public class BrowseIssueTest {
     private BrowseIssueModel browseIssueModel;
 
     @BeforeEach
-    public void openNewTab() {
+    public void openNewTab() throws MalformedURLException {
         browseIssueModel = new BrowseIssueModel();
         browseIssueModel.doLogin();
     }
@@ -49,7 +51,12 @@ public class BrowseIssueTest {
     @CsvFileSource(resources = "/issueIds.csv")
     public void browseIssueWithSpecificId(String issueId) {
         browseIssueModel.openUrlWithSpecificPathAndMaximizeWindowSize(String.format("/browse/%s", issueId));
-        Assertions.assertDoesNotThrow(() -> browseIssueModel.getIssueId());
-        Assertions.assertEquals(issueId, browseIssueModel.getIssueId());
+        String actualIssueId = null;
+        try {
+            actualIssueId = browseIssueModel.getIssueId();
+        } finally {
+            Assertions.assertNotNull(actualIssueId,"Issue key was not found");
+            Assertions.assertEquals(issueId,actualIssueId);
+        }
     }
 }

@@ -1,6 +1,5 @@
 package Model;
 
-import com.codecool.FileReader;
 import com.codecool.WebDriverService;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,6 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.net.MalformedURLException;
 import java.time.Duration;
 
 public class BaseModel {
@@ -23,7 +23,7 @@ public class BaseModel {
     @FindBy(id = "login-form-submit")
     protected WebElement loginButton;
 
-    public BaseModel() {
+    public BaseModel() throws MalformedURLException {
         this.webDriver = WebDriverService.getInstance().getWebDriver();
         driverWait = new WebDriverWait(webDriver, Duration.ofSeconds(15));
         PageFactory.initElements(webDriver, this);
@@ -85,16 +85,16 @@ public class BaseModel {
     }
 
     public void doLogin(){
-        webDriver.navigate().to(FileReader.getValueByKey("jira.baseurl") + "/login.jsp?os_destination=%2Fsecure%2FMyJiraHome.jspa");
+        webDriver.navigate().to(System.getProperty("baseUrl") + "/login.jsp?os_destination=%2Fsecure%2FMyJiraHome.jspa");
         webDriver.manage().window().maximize();
 
-        setUsername(FileReader.getValueByKey("jira.username"));
-        setPassword(FileReader.getValueByKey("jira.password"));
+        setUsername(System.getProperty("username"));
+        setPassword(System.getProperty("password"));
         clickOnLoginButton();
     }
 
     public void openUrlWithSpecificPathAndMaximizeWindowSize(String path){
-        webDriver.get(FileReader.getValueByKey("jira.baseurl") + path);
+        webDriver.get(System.getProperty("baseUrl") + path);
         webDriver.manage().window().maximize();
     }
 

@@ -4,11 +4,13 @@ import Model.Logout.LogoutModel;
 import com.codecool.WebDriverService;
 import org.junit.jupiter.api.*;
 
+import java.net.MalformedURLException;
+
 public class LogoutTest {
     private static LogoutModel logoutModel;
 
     @BeforeAll
-    public static void beforeAll(){
+    public static void beforeAll() throws MalformedURLException {
         logoutModel = new LogoutModel();
     }
 
