@@ -25,3 +25,5 @@ hs_err_pid*
 # personal data
 config.properties
 .idea/
+allure-results/
+/target
