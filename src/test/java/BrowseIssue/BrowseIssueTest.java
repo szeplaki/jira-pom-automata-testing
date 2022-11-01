@@ -37,8 +37,8 @@ public class BrowseIssueTest {
         browseIssueModel.clickSearchField();
         browseIssueModel.writeSearchField("Jira Test Project");
         browseIssueModel.clickSearchButton();
-        Assertions.assertTrue(browseIssueModel.waitUntilKeyIsVisible(expectedKey));
-//        Assertions.assertEquals(expectedKey, browseIssueModel.getIssueId());
+        browseIssueModel.waitUntilKeyIsVisible(expectedKey);
+        Assertions.assertEquals(expectedKey, browseIssueModel.getIssueId());
     }
 
     @Test
@@ -51,8 +51,12 @@ public class BrowseIssueTest {
     @CsvFileSource(resources = "/issueIds.csv")
     public void browseIssueWithSpecificId(String issueId) {
         browseIssueModel.openUrlWithSpecificPathAndMaximizeWindowSize(String.format("/browse/%s", issueId));
-        //try catch
-        Assertions.assertDoesNotThrow(() -> browseIssueModel.getIssueId());
-        Assertions.assertEquals(issueId, browseIssueModel.getIssueId());
+        String actualIssueId = null;
+        try {
+            actualIssueId = browseIssueModel.getIssueId();
+        } finally {
+            Assertions.assertNotNull(actualIssueId,"Issue key was not found");
+            Assertions.assertEquals(issueId,actualIssueId);
+        }
     }
 }
